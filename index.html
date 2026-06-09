@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAS Corporate DMS Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell" data-sidebar="open">
+    <aside class="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <img src="assets/logo.png" alt="Shams Al Sabah General Contracting Co. Ltd.">
+      </div>
+      <button class="collapse-top icon-button" id="sidebarToggleTop" aria-label="Collapse sidebar">
+        <span data-icon="chevrons-left"></span>
+      </button>
+      <nav class="main-nav">
+        <button class="nav-item active" data-view="home"><span data-icon="home"></span><span>Home</span></button>
+        <button class="nav-item" data-view="approvals"><span data-icon="badge-check"></span><span>My Approvals</span><strong>8</strong></button>
+        <button class="nav-item" data-view="documents"><span data-icon="file-text"></span><span>General Documents</span></button>
+        <button class="nav-item" data-view="projects"><span data-icon="project-box"></span><span>Projects</span></button>
+        <button class="nav-item" data-view="favorites"><span data-icon="star"></span><span>Bookmark</span></button>
+      </nav>
+      <nav class="utility-nav">
+        <button class="nav-item" data-view="settings"><span data-icon="settings"></span><span>Settings</span></button>
+        <button class="nav-item" data-view="support"><span data-icon="circle-help"></span><span>Help &amp; Support</span></button>
+      </nav>
+      <button class="collapse-bottom" id="sidebarToggleBottom"><span data-icon="arrow-left"></span><span>Collapse</span></button>
+    </aside>
+
+    <header class="topbar">
+      <div class="search-wrap">
+        <span data-icon="search"></span>
+        <input id="globalSearch" type="search" placeholder="Search documents, folders, projects..." autocomplete="off">
+        <button id="clearSearch" class="clear-search" aria-label="Clear search"><span data-icon="x"></span></button>
+        <kbd>Ctrl + K</kbd>
+      </div>
+      <button class="mobile-menu icon-button" id="mobileMenu" aria-label="Open navigation"><span data-icon="menu"></span></button>
+      <div class="profile">
+        <span class="avatar">JD</span>
+        <span><b>John Doe</b><small>Project Manager</small></span>
+        <span data-icon="chevron-down"></span>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="view active" id="view-home" aria-label="Home">
+        <div class="page-head">
+          <div>
+            <h1>Good morning, John!</h1>
+            <p>Here is what is happening with your documents today.</p>
+          </div>
+          <button class="btn upload-action" data-action="open-upload"><span data-icon="upload"></span>Upload Document</button>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="doc-card" data-view-link="documents" data-area="general">
+            <span class="card-icon"><span data-icon="folder"></span></span>
+            <h2>General Documents</h2>
+            <p>Company-wide policies, SOPs, legal records, HSE, ISO and administrative documents.</p>
+            <button class="btn primary compact">Open <span data-icon="arrow-right"></span></button>
+          </article>
+          <article class="doc-card" data-view-link="projects" data-area="projects">
+            <span class="card-icon"><span data-icon="briefcase"></span></span>
+            <h2>Project Documents</h2>
+            <p>Drawings, inspections, quality plans, contracts, handover files and deliverables.</p>
+            <button class="btn primary compact">Open <span data-icon="arrow-right"></span></button>
+          </article>
+          <section class="panel approvals-panel">
+            <div class="panel-title">
+              <h2>My Pending Approvals <b class="count-pill">8</b></h2>
+              <button class="link-button" data-view-link="approvals">View all</button>
+            </div>
+            <div class="mini-table" id="pendingApprovals"></div>
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-title">
+            <h2>Recent Documents</h2>
+            <button class="link-button" data-view-link="documents">View all</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="recentTable"></table>
+          </div>
+        </section>
+      </section>
+
+      <section class="view" id="view-documents" aria-label="Documents">
+        <div class="split-layout">
+          <aside class="folder-panel">
+            <h2>Folder Structure</h2>
+            <div id="generalTree" class="folder-tree"></div>
+          </aside>
+          <section class="workspace">
+            <div class="crumbs" id="docCrumbs"></div>
+            <div class="workspace-head">
+              <div class="folder-title">
+                <span class="folder-badge"><span data-icon="folder"></span></span>
+                <div>
+                  <h1 id="folderName">Inspection &amp; Test Plans</h1>
+                  <p>Manage documents and files in this folder.</p>
+                </div>
+              </div>
+              <div class="toolbar">
+                <label class="local-search"><span data-icon="search"></span><input id="folderSearch" type="search" placeholder="Search in this folder..."></label>
+                <button class="icon-button" data-action="toggle-filters" title="Filters"><span data-icon="filter"></span></button>
+                <button class="icon-button" data-layout="grid" title="Grid view"><span data-icon="layout-grid"></span></button>
+                <button class="icon-button active" data-layout="list" title="List view"><span data-icon="list"></span></button>
+                <button class="icon-button" data-action="refresh" title="Refresh"><span data-icon="refresh-cw"></span></button>
+                <button class="btn upload-action" data-action="open-upload"><span data-icon="upload"></span>Upload Document</button>
+              </div>
+            </div>
+            <div class="filters-row" id="documentFilters">
+              <select id="statusFilter"><option value="">All Statuses</option><option>Approved</option><option>Under Review</option><option>Rejected</option><option>Draft</option></select>
+              <select id="typeFilter"><option value="">All Types</option><option>Inspection Plan</option><option>Main Contract</option><option>Project Drawing</option><option>Shop Drawings</option><option>Solaris</option></select>
+              <select id="projectFilter"><option value="">All Projects</option><option>Project_001</option><option>Project_002</option><option>Project_003</option><option>Project_004</option></select>
+            </div>
+            <div class="table-card">
+              <div class="table-wrap">
+                <table class="data-table" id="documentsTable"></table>
+              </div>
+              <div class="table-footer"><span id="documentCount"></span><div class="pager"><button><span data-icon="chevron-left"></span></button><button class="active">1</button><button><span data-icon="chevron-right"></span></button></div></div>
+            </div>
+          </section>
+          <aside class="details-panel" id="detailsPanel"></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-projects" aria-label="Projects">
+        <div class="split-layout projects-layout">
+          <aside class="folder-panel">
+            <h2>Project Structure</h2>
+            <div id="projectTree" class="folder-tree"></div>
+          </aside>
+          <section class="workspace">
+            <div class="crumbs">Projects <span data-icon="chevron-right"></span> Project_001</div>
+            <div class="workspace-head">
+              <div class="folder-title">
+                <span class="folder-badge"><span data-icon="folder"></span></span>
+                <div><h1>Project_001</h1><p>Contract, quality, technical and handover documents for the selected project.</p></div>
+              </div>
+              <div class="toolbar">
+                <label class="local-search"><span data-icon="search"></span><input id="projectSearch" type="search" placeholder="Search this project..."></label>
+                <button class="icon-button" data-action="toggle-filters" title="Filters"><span data-icon="filter"></span></button>
+                <button class="icon-button" data-layout="grid" title="Grid view"><span data-icon="layout-grid"></span></button>
+                <button class="icon-button active" data-layout="list" title="List view"><span data-icon="list"></span></button>
+                <button class="icon-button" data-action="refresh" title="Refresh"><span data-icon="refresh-cw"></span></button>
+                <button class="btn upload-action" data-action="open-upload"><span data-icon="upload"></span>Upload Document</button>
+              </div>
+            </div>
+            <div class="filters-row" id="projectFilters">
+              <select><option value="">All Statuses</option><option>Approved</option><option>Under Review</option><option>Rejected</option><option>Draft</option></select>
+              <select><option value="">All Types</option><option>Inspection Plan</option><option>Main Contract</option><option>Project Drawing</option><option>Shop Drawings</option><option>Solaris</option></select>
+              <select><option value="">All Departments</option><option>Quality</option><option>Projects</option><option>Contracts</option><option>Accounting</option></select>
+            </div>
+            <div class="table-card">
+              <div class="table-wrap">
+                <table class="data-table" id="projectTable"></table>
+              </div>
+              <div class="table-footer"><span>Showing 1 to 9 of 9 items</span><div class="pager"><button><span data-icon="chevron-left"></span></button><button class="active">1</button><button><span data-icon="chevron-right"></span></button></div></div>
+            </div>
+          </section>
+          <aside class="details-panel" id="projectDetails"></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-favorites" aria-label="Bookmark">
+        <div class="page-head compact-head">
+          <div class="title-with-icon"><span data-icon="star"></span><div><h1>Bookmark</h1><p>Your bookmarked documents for quick access.</p></div></div>
+          <div class="toolbar">
+            <label class="local-search"><span data-icon="search"></span><input id="bookmarkSearch" type="search" placeholder="Search bookmarks..."></label>
+            <button class="btn ghost" data-action="toggle-bookmark-filters"><span data-icon="filter"></span>Filter</button>
+            <button class="icon-button active" data-layout="list" title="List view"><span data-icon="list"></span></button>
+            <button class="icon-button" data-layout="grid" title="Grid view"><span data-icon="layout-grid"></span></button>
+            <button class="link-button" id="clearFavorites">Clear All</button>
+          </div>
+        </div>
+        <div class="filters-row wide" id="bookmarkFilters">
+          <select id="bookmarkStatusFilter"><option value="">All Statuses</option><option>Approved</option><option>Under Review</option><option>Rejected</option><option>Draft</option></select>
+          <select id="bookmarkTypeFilter"><option value="">All Types</option><option>Inspection Plan</option><option>Main Contract</option><option>Project Drawing</option><option>Shop Drawings</option><option>Solaris</option></select>
+          <select id="bookmarkProjectFilter"><option value="">All Projects</option><option>Project_001</option><option>Project_002</option><option>Project_003</option><option>Project_004</option></select>
+        </div>
+        <section class="table-card wide">
+          <div class="table-wrap"><table class="data-table" id="favoritesTable"></table></div>
+          <div class="table-footer"><span id="favoritesCount"></span><div class="pager"><button><span data-icon="chevron-left"></span></button><button class="active">1</button><button><span data-icon="chevron-right"></span></button></div></div>
+        </section>
+      </section>
+
+      <section class="view" id="view-approvals" aria-label="Approvals">
+        <div class="page-head compact-head">
+          <div><h1>My Approvals</h1><p>Review documents waiting for your action.</p></div>
+          <div class="toolbar"><button class="btn ghost"><span data-icon="filter"></span>Filter</button><button class="btn primary" data-action="bulk-approve"><span data-icon="check"></span>Bulk Approve</button></div>
+        </div>
+        <div class="kanban">
+          <section><h2>Manager Review</h2><div id="approvalCol1"></div></section>
+          <section><h2>Quality Approval</h2><div id="approvalCol2"></div></section>
+          <section><h2>Final Approval</h2><div id="approvalCol3"></div></section>
+        </div>
+      </section>
+
+      <section class="view" id="view-settings" aria-label="Settings">
+        <div class="page-head compact-head"><div><h1>Settings</h1><p>Prototype configuration for roles, workflows and document masters.</p></div></div>
+        <div class="settings-grid">
+          <article class="panel"><h2>Document Masters</h2><p>Departments, document types, confidentiality levels and numbering rules.</p><button class="btn ghost">Manage Masters</button></article>
+          <article class="panel"><h2>Approval Workflows</h2><p>Predefined approver chains by folder path, project and department.</p><button class="btn ghost">Configure Workflow</button></article>
+          <article class="panel"><h2>Roles &amp; Access</h2><p>Project managers, quality managers, construction directors and document controllers.</p><button class="btn ghost">Manage Access</button></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-support" aria-label="Help and Support">
+        <div class="page-head compact-head"><div><h1>Help &amp; Support</h1><p>Guided support area for DMS users.</p></div></div>
+        <div class="settings-grid">
+          <article class="panel"><h2>Quick Help</h2><p>Upload documents, browse folder paths, track approvals and preview files.</p><button class="btn ghost">Open Guide</button></article>
+          <article class="panel"><h2>Contact Document Control</h2><p>Raise a support request for folder access, workflow changes or document corrections.</p><button class="btn ghost">Create Ticket</button></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="uploadDialog" class="modal">
+    <form method="dialog" class="upload-form">
+      <header class="modal-head">
+        <div class="title-with-icon"><span class="folder-badge"><span data-icon="upload"></span></span><div><h1>Upload Document</h1><p>Fill in the details below to upload the document.</p></div></div>
+        <div class="toolbar"><button class="btn ghost" value="cancel"><span data-icon="x"></span>Cancel</button><button class="btn primary" id="submitUpload" value="submit"><span data-icon="send"></span>Submit Document</button></div>
+      </header>
+      <section class="form-section full">
+        <h2>1. Document Path</h2>
+        <div class="field-grid path-grid">
+          <label><span class="field-label">Department Type <b>*</b></span><span class="radio-line"><input type="radio" name="dept" value="Company"> Company <input type="radio" name="dept" value="Project" checked> Project</span></label>
+          <label id="projectSelectField"><span class="field-label">Select Project <b>*</b></span><select id="uploadProjectSelect"><option>Project_001</option><option>Project_002</option><option>Project_003</option><option>Project_004</option></select></label>
+          <label><span class="field-label">Folder Path <b>*</b></span><div class="path-input" id="uploadPath">Projects <span data-icon="chevron-right"></span> Project_001 <span data-icon="chevron-right"></span> Quality <span data-icon="chevron-right"></span> Inspection &amp; Test Plan <button type="button" class="btn outline-accent small" data-action="open-folder-browser"><span data-icon="folder-open"></span>Browse</button></div></label>
+        </div>
+      </section>
+      <div class="upload-grid">
+        <section class="form-section">
+          <h2>2. Document Information</h2>
+          <div class="field-grid">
+            <label><span class="field-label">Document Title / Subject <b>*</b></span><input value="Inspection & Test Plan - Mechanical Works"></label>
+            <label><span class="field-label">Document Type <b>*</b></span><select><option>Inspection Plan</option><option>Shop Drawings</option><option>Main Contract</option></select></label>
+            <label><span class="field-label">Reference Number <b>*</b></span><input value="ITP-MECH-001"></label>
+            <label><span class="field-label">Document Date <b>*</b></span><input value="20 May 2024"></label>
+            <label><span class="field-label">Revision</span><input value="A"></label>
+            <label><span class="field-label">Confidentiality <b>*</b></span><select><option>Internal Use</option><option>Confidential</option><option>Public</option></select></label>
+          </div>
+          <h2>4. Upload File</h2>
+          <div class="drop-zone"><span data-icon="cloud-upload"></span><strong>Drag &amp; drop file(s) here or</strong><button type="button" class="btn outline-accent small">Browse Files</button><small>Allowed file types: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG. Max. 100 MB</small></div>
+          <div class="file-chip"><span class="file-icon pdf">PDF</span>Inspection &amp; Test Plan - Mechanical Works.pdf <b>2.4 MB</b><button type="button" class="icon-button danger"><span data-icon="trash"></span></button></div>
+        </section>
+        <section class="form-section approval-box">
+          <h2>3. Approval Details</h2>
+          <p class="info-box"><span data-icon="info"></span>Approvers are predefined based on the selected path and approval workflow.</p>
+          <div class="toggle-line"><b>Is Approval Required?</b><label class="switch"><input type="checkbox" id="approvalRequired" checked><span></span></label><strong id="approvalRequiredLabel">Yes</strong></div>
+          <div id="approverSection">
+            <h3>Approvers in order</h3>
+            <ol class="approver-list">
+              <li><b>Ahmed Khan</b><span>Quality Manager</span></li>
+              <li><b>Sara Ali</b><span>Project Manager</span></li>
+              <li><b>John Doe</b><span>Construction Director</span></li>
+            </ol>
+            <p class="warning-box"><span data-icon="lock"></span>You cannot change approvers. They are managed from master.</p>
+          </div>
+        </section>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="shareDialog" class="modal share-modal">
+    <form method="dialog" class="share-form">
+      <header class="modal-head">
+        <div><h1>Share Document</h1><p>Add an employee name and copy the document link.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <label>Employee Name <input id="shareEmployee" value="Ahmed Khan" placeholder="Enter employee name"></label>
+      <label>Share Link <div class="copy-row"><input id="shareLink" readonly value=""><button type="button" class="btn upload-action" id="copyShareLink"><span data-icon="share"></span>Copy Link</button></div></label>
+    </form>
+  </dialog>
+
+  <dialog id="folderBrowserDialog" class="modal folder-browser-modal">
+    <form method="dialog" class="folder-browser-form">
+      <header class="modal-head">
+        <div><h1>Select Folder Path</h1><p>Choose a folder based on the selected department type and project.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <div class="folder-browser-tree" id="folderBrowserTree"></div>
+      <div class="folder-browser-actions">
+        <button class="btn ghost" value="cancel">Cancel</button>
+        <button class="btn upload-action" id="applyFolderPath" value="apply"><span data-icon="folder-open"></span>Select Folder</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="previewDialog" class="modal preview-modal">
+    <form method="dialog">
+      <header class="modal-head"><div><h1 id="previewTitle">Document Preview</h1><p>Read-only preview for client demo.</p></div><button class="icon-button" value="close"><span data-icon="x"></span></button></header>
+      <div class="preview-page" id="previewContent"></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

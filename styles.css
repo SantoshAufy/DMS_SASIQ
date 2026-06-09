@@ -83,6 +83,7 @@ button { cursor: pointer; }
   background: transparent;
   text-align: left;
   font-weight: 600;
+  font-size: 18px;
 }
 .nav-item svg { width: 26px; height: 26px; stroke-width: 1.8; }
 .legacy-icon {

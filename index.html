@@ -19,7 +19,7 @@
         <span class="nav-caption">Navigation</span>
         <button class="nav-item active" data-view="home"><span data-icon="home"></span><span>Home</span></button>
         <button class="nav-item" data-view="approvals"><span data-icon="badge-check"></span><span>My Approvals</span><strong>8</strong></button>
-        <button class="nav-item" data-view="documents"><span data-icon="file-text"></span><span>General Documents</span></button>
+        <button class="nav-item" data-view="documents"><span data-icon="file-text"></span><span>Company Records</span></button>
         <button class="nav-item" data-view="projects"><span data-icon="project-box"></span><span>Projects</span></button>
         <button class="nav-item" data-view="favorites"><span data-icon="bookmark"></span><span>Bookmark</span></button>
         <button class="nav-item" data-view="reports"><span data-icon="bar-chart"></span><span>Reports</span></button>
@@ -58,7 +58,7 @@
         <div class="dashboard-grid">
           <article class="doc-card" data-view-link="documents" data-area="general">
             <span class="card-icon"><span data-icon="folder"></span></span>
-            <h2>General Documents</h2>
+            <h2>Company Records</h2>
             <p>Company-wide policies, SOPs, legal records, HSE, ISO and administrative documents.</p>
             <button class="btn primary compact">Open <span data-icon="arrow-right"></span></button>
           </article>
@@ -112,6 +112,10 @@
         <div class="split-layout">
           <aside class="folder-panel">
             <h2>Folder Structure</h2>
+            <div class="folder-panel-tools">
+              <label class="tree-search"><span data-icon="search"></span><input type="search" data-tree-search="generalTree" placeholder="Search folders..."></label>
+              <button class="icon-button" title="Filter folders"><span data-icon="filter"></span></button>
+            </div>
             <div id="generalTree" class="folder-tree"></div>
           </aside>
           <section class="workspace">
@@ -153,14 +157,18 @@
         <div class="split-layout projects-layout">
           <aside class="folder-panel">
             <h2>Project Structure</h2>
+            <div class="folder-panel-tools">
+              <label class="tree-search"><span data-icon="search"></span><input type="search" data-tree-search="projectTree" placeholder="Search folders..."></label>
+              <button class="icon-button" title="Filter folders"><span data-icon="filter"></span></button>
+            </div>
             <div id="projectTree" class="folder-tree"></div>
           </aside>
           <section class="workspace">
-            <div class="crumbs">Projects <span data-icon="chevron-right"></span> Project_001</div>
+            <div class="crumbs" id="projectCrumbs">Projects <span data-icon="chevron-right"></span> Project_001</div>
             <div class="workspace-head">
               <div class="folder-title">
                 <span class="folder-badge"><span data-icon="folder"></span></span>
-                <div><h1>Project_001</h1><p>Contract, quality, technical and handover documents for the selected project.</p></div>
+                <div><h1 id="projectFolderName">Project_001</h1><p id="projectFolderHint">Contract, quality, technical and handover documents for the selected project.</p></div>
               </div>
               <div class="toolbar">
                 <label class="local-search"><span data-icon="search"></span><input id="projectSearch" type="search" placeholder="Search this project..."></label>
@@ -203,33 +211,37 @@
           <select id="bookmarkTypeFilter"><option value="">All Types</option><option>Inspection Plan</option><option>Main Contract</option><option>Project Drawing</option><option>Shop Drawings</option><option>Solaris</option></select>
           <select id="bookmarkProjectFilter"><option value="">All Projects</option><option>Project_001</option><option>Project_002</option><option>Project_003</option><option>Project_004</option></select>
         </div>
-        <section class="table-card wide">
-          <div class="table-wrap"><table class="data-table" id="favoritesTable"></table></div>
-          <div class="table-footer"><span id="favoritesCount"></span><div class="pager"><button><span data-icon="chevron-left"></span></button><button class="active">1</button><button><span data-icon="chevron-right"></span></button></div></div>
-        </section>
+        <div class="bookmark-layout wide" id="bookmarkLayout">
+          <section class="table-card">
+            <div class="table-wrap"><table class="data-table" id="favoritesTable"></table></div>
+            <div class="table-footer"><span id="favoritesCount"></span><div class="pager"><button><span data-icon="chevron-left"></span></button><button class="active">1</button><button><span data-icon="chevron-right"></span></button></div></div>
+          </section>
+          <aside class="details-panel" id="bookmarkDetails"></aside>
+        </div>
       </section>
 
       <section class="view" id="view-reports" aria-label="Reports">
         <div class="page-head compact-head">
           <div class="title-with-icon"><span data-icon="bar-chart"></span><div><h1>Reports</h1><p>Comprehensive document upload, approval and pending status overview.</p></div></div>
-          <div class="toolbar"><button class="btn ghost" data-action="reports-refresh"><span data-icon="refresh-cw"></span>Refresh</button><button class="btn upload-action" data-action="reports-export"><span data-icon="download"></span>Export Report</button></div>
+          <div class="toolbar"><button class="btn ghost" data-action="reports-refresh"><span data-icon="refresh-cw"></span>Refresh</button></div>
         </div>
         <div class="report-filters wide">
-          <select><option>All Folders</option><option>Company > Quality</option><option>Projects > Project_001</option><option>Projects > Project_002</option></select>
-          <select><option>All Projects</option><option>Project_001</option><option>Project_002</option><option>Project_003</option></select>
-          <select><option>All Statuses</option><option>Approved</option><option>Under Review</option><option>Pending</option><option>Rejected</option></select>
-          <select><option>This Month</option><option>This Week</option><option>Last 30 Days</option><option>This Year</option></select>
+          <select id="reportAreaFilter"><option>Project Records</option><option>Company Records</option></select>
+          <select id="reportProjectFilter"><option>All Projects</option><option>Project_001</option><option>Project_002</option><option>Project_003</option><option>Project_004</option></select>
+          <select id="reportDepartmentFilter"><option>All Departments</option><option>Quality</option><option>HSE</option><option>Admin</option><option>Finance & Accounting</option><option>Material Control</option><option>Contracts</option><option>Technical</option><option>Project DCC</option></select>
+          <select id="reportStatusFilter"><option>All Statuses</option><option>Approved</option><option>Under Review</option><option>Pending</option><option>Rejected</option></select>
+          <select id="reportPeriodFilter"><option>This Month</option><option>This Week</option><option>Last 30 Days</option><option>This Year</option></select>
         </div>
         <div class="report-kpis wide">
-          <article><span>Total Uploaded</span><b>124</b><small>+18 this month</small></article>
-          <article><span>Approved</span><b>86</b><small>69% completion</small></article>
-          <article><span>In Review</span><b>24</b><small>With approvers</small></article>
-          <article><span>Pending</span><b>14</b><small>Awaiting action</small></article>
+          <article><i class="kpi-icon blue"><span data-icon="folder"></span></i><div><span>Total Uploaded</span><b id="reportTotal">124</b><small id="reportTotalNote">+18 this month</small></div></article>
+          <article><i class="kpi-icon green"><span data-icon="check"></span></i><div><span>Approved</span><b id="reportApproved">86</b><small id="reportApprovedNote">69% completion</small></div></article>
+          <article><i class="kpi-icon amber"><span data-icon="history"></span></i><div><span>In Review</span><b id="reportReview">24</b><small id="reportReviewNote">With approvers</small></div></article>
+          <article><i class="kpi-icon red"><span data-icon="file-text"></span></i><div><span>Pending</span><b id="reportPending">14</b><small id="reportPendingNote">Awaiting action</small></div></article>
         </div>
         <div class="report-grid wide">
-          <section class="settings-box"><h3>Folder Wise Document Status</h3><table class="mini-settings-table"><thead><tr><th>Folder</th><th>Uploaded</th><th>Approved</th><th>In Review</th><th>Pending</th></tr></thead><tbody><tr><td>Company > Quality > Inspection &amp; Test Plans</td><td>32</td><td>22</td><td>7</td><td>3</td></tr><tr><td>Projects > Project_001 > Technical > Shop Drawings</td><td>28</td><td>18</td><td>6</td><td>4</td></tr><tr><td>Projects > Project_001 > Contracts</td><td>18</td><td>14</td><td>3</td><td>1</td></tr><tr><td>Company > HSE > Reports</td><td>15</td><td>11</td><td>2</td><td>2</td></tr></tbody></table></section>
+          <section class="settings-box"><h3>Folder Wise Document Status</h3><table class="mini-settings-table"><thead><tr><th>Folder</th><th>Uploaded</th><th>Approved</th><th>In Review</th><th>Pending</th></tr></thead><tbody><tr><td>Company Records > Quality > Inspection &amp; Test Plans</td><td>32</td><td>22</td><td>7</td><td>3</td></tr><tr><td>Projects > Project_001 > Technical > Shop Drawings</td><td>28</td><td>18</td><td>6</td><td>4</td></tr><tr><td>Projects > Project_001 > Contracts</td><td>18</td><td>14</td><td>3</td><td>1</td></tr><tr><td>Company Records > HSE > Reports</td><td>15</td><td>11</td><td>2</td><td>2</td></tr></tbody></table></section>
           <section class="settings-box"><h3>Pending With</h3><table class="mini-settings-table"><thead><tr><th>Approver</th><th>Designation</th><th>Documents</th><th>Oldest Pending</th></tr></thead><tbody><tr><td>Ahmed Khan</td><td>Quality Manager</td><td>6</td><td>3 days</td></tr><tr><td>Sara Ali</td><td>Project Manager</td><td>5</td><td>2 days</td></tr><tr><td>John Doe</td><td>Construction Director</td><td>2</td><td>1 day</td></tr><tr><td>Fatima Noor</td><td>Document Controller</td><td>1</td><td>Today</td></tr></tbody></table></section>
-          <section class="settings-box report-span"><h3>Detailed Pending Documents</h3><table class="mini-settings-table"><thead><tr><th>Document</th><th>Folder</th><th>Status</th><th>Pending With</th><th>Due</th></tr></thead><tbody><tr><td>ITP-MECH-002-Rev0.xlsx</td><td>Project_001 > Quality</td><td><span class="status review">Under Review</span></td><td>Sara Ali</td><td>22 May 2024</td></tr><tr><td>ITP-ELEC-002-Rev0.pdf</td><td>Project_002 > Quality</td><td><span class="status review">Under Review</span></td><td>Ahmed Khan</td><td>23 May 2024</td></tr><tr><td>TECH-SHOP-001.dwg</td><td>Project_001 > Technical</td><td><span class="status draft">Draft</span></td><td>Document Controller</td><td>Not submitted</td></tr><tr><td>CON-MAIN-001.pdf</td><td>Project_001 > Contracts</td><td><span class="status approved">Approved</span></td><td>Completed</td><td>Closed</td></tr></tbody></table></section>
+          <section class="settings-box report-span"><h3>Detailed Pending Documents</h3><table class="mini-settings-table"><thead><tr><th>Document</th><th>Folder</th><th>Status</th><th>Pending With</th><th>Due</th></tr></thead><tbody><tr><td><span class="file-icon xlsx">XLSX</span> ITP-MECH-002-Rev0.xlsx</td><td>Project_001 > Quality</td><td><span class="status review">Under Review</span></td><td>Sara Ali</td><td>22 May 2024</td></tr><tr><td><span class="file-icon pdf">PDF</span> DRG-EL-1023-Rev1.pdf</td><td>Project_001 > Technical</td><td><span class="status review">Manager Review</span></td><td>Ahmed Khan</td><td>24 May 2024</td></tr><tr><td><span class="file-icon docx">DOCX</span> SOP-QA-05-Rev2.docx</td><td>Company Records > Quality</td><td><span class="status review">QA Review</span></td><td>Fatima Noor</td><td>25 May 2024</td></tr><tr><td><span class="file-icon pdf">PDF</span> MTR-MECH-015-Rev0.pdf</td><td>Project_001 > Mechanical</td><td><span class="status draft">Client Review</span></td><td>John Doe</td><td>26 May 2024</td></tr></tbody></table></section>
         </div>
       </section>
 
@@ -247,50 +259,47 @@
 
       <section class="view" id="view-settings" aria-label="Settings">
         <div class="page-head compact-head">
-          <div><h1>Settings</h1><p>Configure masters, workflows, access, numbering and system controls for the DMS.</p></div>
-          <div class="toolbar"><button class="btn ghost" data-action="settings-export"><span data-icon="download"></span>Export Setup</button><button class="btn upload-action" data-action="settings-save"><span data-icon="check"></span>Save Changes</button></div>
+          <div><h1>Settings</h1><p>Manage user access, projects, workflows, folder structure, departments and admin users.</p></div>
         </div>
         <div class="settings-shell">
           <aside class="settings-nav" aria-label="Settings sections">
-            <button class="settings-tab active" data-settings-tab="masters"><span data-icon="file-text"></span><span>Document Masters</span></button>
-            <button class="settings-tab" data-settings-tab="workflows"><span data-icon="badge-check"></span><span>Approval Workflows</span></button>
-            <button class="settings-tab" data-settings-tab="access"><span data-icon="settings"></span><span>Roles &amp; Access</span></button>
+            <button class="settings-tab active" data-settings-tab="access"><span data-icon="settings"></span><span>Roles &amp; Access</span></button>
+            <button class="settings-tab" data-settings-tab="projects-admin"><span data-icon="project-box"></span><span>Project Creation</span></button>
+            <button class="settings-tab" data-settings-tab="workflows"><span data-icon="badge-check"></span><span>Workflow Management</span></button>
             <button class="settings-tab" data-settings-tab="folders"><span data-icon="folder"></span><span>Folder Structure</span></button>
+            <button class="settings-tab" data-settings-tab="departments"><span data-icon="file-text"></span><span>Department Management</span></button>
+            <button class="settings-tab" data-settings-tab="admins"><span data-icon="lock"></span><span>Admin Users</span></button>
           </aside>
 
           <section class="settings-content">
-            <div class="settings-panel active" id="settings-masters">
-              <div class="settings-panel-head"><div><h2>Document Masters</h2><p>Maintain departments, document types, confidentiality and metadata fields.</p></div><button class="btn ghost" data-action="settings-add-master"><span data-icon="plus"></span>Add Master</button></div>
-              <div class="settings-cards">
-                <article><b>12</b><span>Departments</span></article>
-                <article><b>28</b><span>Document Types</span></article>
-                <article><b>4</b><span>Confidentiality Levels</span></article>
-                <article><b>16</b><span>Required Fields</span></article>
-              </div>
-              <div class="settings-grid two">
-                <section class="settings-box"><h3>Departments</h3><table class="mini-settings-table"><tbody><tr><td>Quality</td><td>Active</td><td>9 doc types</td></tr><tr><td>HSE</td><td>Active</td><td>7 doc types</td></tr><tr><td>Finance &amp; Accounting</td><td>Active</td><td>6 doc types</td></tr><tr><td>Project DCC</td><td>Active</td><td>8 doc types</td></tr></tbody></table></section>
-                <section class="settings-box"><h3>Document Types</h3><table class="mini-settings-table"><tbody><tr><td>Inspection Plan</td><td>Quality</td><td>Approval required</td></tr><tr><td>Shop Drawings</td><td>Technical</td><td>Revision controlled</td></tr><tr><td>Main Contract</td><td>Contracts</td><td>Confidential</td></tr><tr><td>Timesheet</td><td>Admin</td><td>Monthly</td></tr></tbody></table></section>
-              </div>
-              <section class="settings-box"><h3>Masters</h3><table class="mini-settings-table"><tbody><tr><td>Confidentiality Levels</td><td>Public, Internal Use, Confidential, Restricted</td><td><button class="btn small ghost" data-action="settings-add-master">Add Master</button></td></tr><tr><td>Revision Codes</td><td>0, A, B, C, Draft</td><td><button class="btn small ghost" data-action="settings-add-master">Add Master</button></td></tr><tr><td>File Categories</td><td>PDF, DOCX, XLSX, DWG, Image</td><td><button class="btn small ghost" data-action="settings-add-master">Add Master</button></td></tr></tbody></table></section>
+            <div class="settings-panel active" id="settings-access">
+              <div class="settings-panel-head"><div><h2>Roles &amp; Access</h2><p>Grant access for General or Project documents at department and folder level.</p></div><button class="btn ghost" data-action="settings-invite-user"><span data-icon="plus"></span>Add User Access</button></div>
+              <section class="settings-box"><h3>Existing User Permissions</h3><table class="mini-settings-table"><thead><tr><th>Users</th><th>Scope</th><th>Departments</th><th>Folders</th><th>Permission</th><th>Action</th></tr></thead><tbody><tr><td>Jane Doe, Lisa Ray</td><td>General</td><td>Quality, HSE</td><td>Inspection &amp; Test Plans, Reports</td><td>Contributor</td><td><button class="btn small ghost" data-action="settings-edit-access">Edit</button></td></tr><tr><td>Ahmed Khan, Sara Ali</td><td>Project</td><td>Quality, Technical</td><td>Inspection &amp; Test Plan, Shop Drawings</td><td>Full Control</td><td><button class="btn small ghost" data-action="settings-edit-access">Edit</button></td></tr></tbody></table></section>
+            </div>
+
+            <div class="settings-panel" id="settings-projects-admin">
+              <div class="settings-panel-head"><div><h2>Project Creation</h2><p>Create projects and assign project-level permissions. Project details are locked after save; member permissions remain editable.</p></div><button class="btn ghost" data-action="settings-create-project"><span data-icon="plus"></span>Add Project</button></div>
+              <section class="settings-box"><h3>Saved Projects</h3><table class="mini-settings-table"><thead><tr><th>Project</th><th>Client</th><th>Members With Access</th><th>Editable</th></tr></thead><tbody><tr><td>Project_001</td><td>ABC Corp</td><td>Ahmed Khan, Sara Ali, John Doe, Fatima Noor, Mohammed Raza, Lisa Ray, Rakesh Gupta, Meera Iyer</td><td><button class="btn small ghost" data-action="settings-edit-project-members">Edit Members</button></td></tr><tr><td>Project_002</td><td>Solaris Energy LLC</td><td>Sara Ali, John Doe, Fatima Noor, Vikram Rao, Arun Kumar</td><td><button class="btn small ghost" data-action="settings-edit-project-members">Edit Members</button></td></tr></tbody></table></section>
             </div>
 
             <div class="settings-panel" id="settings-workflows">
-              <div class="settings-panel-head"><div><h2>Approval Workflows</h2><p>Define approver chains based on folder path, document type and project.</p></div><button class="btn ghost" data-action="settings-add-workflow"><span data-icon="plus"></span>New Workflow</button></div>
-              <section class="settings-box"><h3>Workflow Matrix</h3><table class="mini-settings-table"><thead><tr><th>Folder / Type</th><th>Stage 1</th><th>Stage 2</th><th>Final</th><th>SLA</th></tr></thead><tbody><tr><td>Quality / Inspection Plan</td><td>QA Engineer</td><td>Quality Manager</td><td>Project Manager</td><td>3 days</td></tr><tr><td>Contracts / Main Contract</td><td>Contract Admin</td><td>Finance Manager</td><td>Director</td><td>5 days</td></tr><tr><td>Technical / Shop Drawings</td><td>Technical Engineer</td><td>Technical Manager</td><td>Client Review</td><td>4 days</td></tr></tbody></table></section>
-            </div>
-
-            <div class="settings-panel" id="settings-access">
-              <div class="settings-panel-head"><div><h2>Roles &amp; Access</h2><p>Manage users, role permissions, project access and department control.</p></div><button class="btn ghost" data-action="settings-invite-user"><span data-icon="plus"></span>Invite User</button></div>
-              <div class="settings-grid two">
-                <section class="settings-box"><h3>Role Permissions</h3><table class="mini-settings-table"><tbody><tr><td>Project Manager</td><td>Upload, Approve, Share</td><td>Active</td></tr><tr><td>Quality Manager</td><td>Review, Approve, Version</td><td>Active</td></tr><tr><td>Document Controller</td><td>Masters, Upload, Archive</td><td>Active</td></tr><tr><td>Viewer</td><td>Preview, Download</td><td>Active</td></tr></tbody></table></section>
-                <section class="settings-box"><h3>Project Access</h3><table class="mini-settings-table"><tbody><tr><td>Ahmed Khan</td><td>Project_001</td><td>Quality Manager</td></tr><tr><td>Sara Ali</td><td>Project_001, Project_002</td><td>Project Manager</td></tr><tr><td>John Doe</td><td>All Projects</td><td>Construction Director</td></tr><tr><td>Fatima Noor</td><td>Project_003</td><td>Document Controller</td></tr></tbody></table></section>
-              </div>
+              <div class="settings-panel-head"><div><h2>Workflow Management</h2><p>Create approval workflows for Company or Project documents with two approver levels.</p></div><button class="btn ghost" data-action="settings-add-workflow"><span data-icon="plus"></span>Create Workflow</button></div>
+              <section class="settings-box"><h3>Existing Workflows</h3><table class="mini-settings-table"><thead><tr><th>Area</th><th>Department</th><th>Folder</th><th>Approver 1</th><th>Approver 2</th><th>Action</th></tr></thead><tbody><tr><td>Project Document</td><td>Quality</td><td>Inspection &amp; Test Plans</td><td>Ahmed Khan</td><td>John Doe</td><td><button class="btn small ghost" data-action="settings-edit-workflow">Edit</button></td></tr><tr><td>Company Records</td><td>HSE</td><td>Reports</td><td>Sara Ali</td><td>John Doe</td><td><button class="btn small ghost" data-action="settings-edit-workflow">Edit</button></td></tr></tbody></table></section>
             </div>
 
             <div class="settings-panel" id="settings-folders">
-              <div class="settings-panel-head"><div><h2>Folder Structure</h2><p>Create and manage folders at every level of the Company and Project hierarchy.</p></div><button class="btn ghost" data-action="settings-sync-folders"><span data-icon="refresh-cw"></span>Sync Structure</button></div>
-              <section class="settings-box"><h3>Create New Folder</h3><div class="settings-form-grid"><label><span class="field-label">Root</span><select><option>Company</option><option>Projects</option><option>Project_001</option><option>Project_002</option></select></label><label><span class="field-label">Parent Folder</span><select><option>Quality</option><option>HSE</option><option>Admin</option><option>Technical</option><option>Contracts</option></select></label><label><span class="field-label">New Folder Name</span><input placeholder="Enter folder name"></label><label><span class="field-label">Folder Level</span><select><option>Same level</option><option>Child folder</option><option>Sub child folder</option></select></label></div><button class="btn upload-action settings-inline-action" data-action="settings-create-folder"><span data-icon="plus"></span>Create Folder</button></section>
-              <section class="settings-box"><h3>Hierarchy Controls</h3><table class="mini-settings-table"><thead><tr><th>Hierarchy Level</th><th>Example Path</th><th>Create Folder</th></tr></thead><tbody><tr><td>Level 1</td><td>Company &gt; Quality</td><td><button class="btn small ghost" data-action="settings-create-folder">Add Same Level</button></td></tr><tr><td>Level 2</td><td>Company &gt; Quality &gt; Inspection &amp; Test Plans</td><td><button class="btn small ghost" data-action="settings-create-folder">Add Child</button></td></tr><tr><td>Project Level</td><td>Projects &gt; Project_001 &gt; Technical</td><td><button class="btn small ghost" data-action="settings-create-folder">Add Project Folder</button></td></tr><tr><td>Nested Level</td><td>Material Control &gt; Local Material Store &gt; Issue Note</td><td><button class="btn small ghost" data-action="settings-create-folder">Add Sub Folder</button></td></tr></tbody></table></section>
+              <div class="settings-panel-head"><div><h2>Folder Structure</h2><p>View every configured folder and add new folders under the selected department.</p></div><button class="btn ghost" data-action="settings-create-folder"><span data-icon="plus"></span>Add Folder</button></div>
+              <section class="settings-box"><div class="settings-subtabs"><button class="subtab active" data-folder-tab="general">Company Records</button><button class="subtab" data-folder-tab="projects">Projects</button></div><div class="folder-structure-panel active" id="folder-structure-general"><h3>Company Records Folders</h3><table class="mini-settings-table"><thead><tr><th>Department</th><th>Folders</th></tr></thead><tbody><tr><td>Quality</td><td>Project Quality Plan (General), Construction Quality Plan, Inspection &amp; Test Plans</td></tr><tr><td>HSE</td><td>Policies &amp; Plans, Standard Operating Procedures, Safe Work Method Statements, Forms &amp; Formats, Reports</td></tr><tr><td>Admin</td><td>Company Doc, Admin Orders / Official Letters, Attendance, HR, Assets Docs, Utilities</td></tr><tr><td>Finance &amp; Accounting</td><td>Accounting, Audit</td></tr><tr><td>Material Management</td><td>Non-Accounting Stock Issue Note, Financial Issue Note, Asset Issue Note, Receipt Notes, Transfer Note</td></tr><tr><td>Audit</td><td>Contracts, Financial Settlement, Bonds &amp; Guarantees</td></tr><tr><td>Tender &amp; Proposal</td><td>Default Folder</td></tr><tr><td>Projects</td><td>Completed Projects, Ongoing Projects, Standard Construction Docs</td></tr><tr><td>ISO</td><td>Default Folder</td></tr></tbody></table></div><div class="folder-structure-panel" id="folder-structure-projects"><h3>Project Document Folders</h3><table class="mini-settings-table"><thead><tr><th>Department</th><th>Folders</th></tr></thead><tbody><tr><td>Quality</td><td>Inspection &amp; Test Plan, Project Quality Plan, RFI's, Reports, Hand Over</td></tr><tr><td>Planning</td><td>Schedule, Reports, QS &amp; Invoices, Photos</td></tr><tr><td>Material Control</td><td>Local Material Store, Project Materials, MRR, MOR, Shipment Docs, Others</td></tr><tr><td>Technical</td><td>Technical Proposals, Shop Drawings</td></tr><tr><td>Project DCC</td><td>Project Correspondence Letters, Document Transmittal, Project Documents and Specification, Project Drawings</td></tr></tbody></table></div></section>
+            </div>
+
+            <div class="settings-panel" id="settings-departments">
+              <div class="settings-panel-head"><div><h2>Department Management</h2><p>Create departments under General or Project documents.</p></div><button class="btn ghost" data-action="settings-create-department"><span data-icon="plus"></span>Create Department</button></div>
+              <section class="settings-box"><h3>Existing Departments</h3><table class="mini-settings-table"><thead><tr><th>Area</th><th>Department</th></tr></thead><tbody><tr><td>Company Records</td><td>Quality</td></tr><tr><td>Project Document</td><td>Technical</td></tr><tr><td>Project Document</td><td>Project DCC</td></tr></tbody></table></section>
+            </div>
+
+            <div class="settings-panel" id="settings-admins">
+              <div class="settings-panel-head"><div><h2>Admin Users</h2><p>Only users added here can see and access the Settings module.</p></div><button class="btn ghost" data-action="settings-add-admin"><span data-icon="plus"></span>Add Admin</button></div>
+              <section class="settings-box"><h3>Settings Admin List</h3><table class="mini-settings-table"><thead><tr><th>User</th><th>Visible Settings</th><th>Action</th></tr></thead><tbody><tr><td>John Doe</td><td>All Settings</td><td><button class="btn small ghost" data-action="settings-edit-admin">Edit</button></td></tr><tr><td>Fatima Noor</td><td>Roles &amp; Access</td><td><button class="btn small ghost" data-action="settings-edit-admin">Edit</button></td></tr></tbody></table></section>
             </div>
           </section>
         </div>
@@ -299,8 +308,8 @@
       <section class="view" id="view-support" aria-label="Help and Support">
         <div class="page-head compact-head"><div><h1>Help &amp; Support</h1><p>Guided support area for DMS users.</p></div></div>
         <div class="settings-grid">
-          <article class="panel"><h2>Quick Help</h2><p>Upload documents, browse folder paths, track approvals and preview files.</p><button class="btn ghost">Open Guide</button></article>
-          <article class="panel"><h2>Contact Document Control</h2><p>Raise a support request for folder access, workflow changes or document corrections.</p><button class="btn ghost">Create Ticket</button></article>
+          <article class="panel"><h2>Quick Help</h2><p>Upload documents, browse folder paths, track approvals and preview files.</p><button class="btn ghost" data-action="open-guide"><span data-icon="file-text"></span>Open Guide</button></article>
+          <article class="panel"><h2>Contact Admin</h2><p>Reach the DMS admin team for folder access, workflow changes or document corrections.</p><button class="btn ghost" data-action="contact-admin"><span data-icon="phone"></span>Contact</button></article>
         </div>
       </section>
     </main>
@@ -364,6 +373,49 @@
     </form>
   </dialog>
 
+  <dialog id="settingsDialog" class="modal settings-modal">
+    <form method="dialog" class="settings-dialog-form">
+      <header class="modal-head">
+        <div><h1 id="settingsDialogTitle">Settings</h1><p id="settingsDialogSubtitle">Update setup details for the DMS.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <div id="settingsDialogBody" class="settings-dialog-body"></div>
+      <div class="folder-browser-actions">
+        <button class="btn ghost" value="cancel">Cancel</button>
+        <button class="btn upload-action" id="settingsDialogSave" value="save"><span data-icon="check"></span>Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="contactAdminDialog" class="modal contact-modal">
+    <form method="dialog" class="share-form">
+      <header class="modal-head">
+        <div><h1>Contact Admin</h1><p>DMS admin contacts for support and access requests.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <div class="contact-list">
+        <article class="contact-card"><span class="avatar">JD</span><div><b>John Doe</b><small>System Admin</small><a href="mailto:john.doe@sas-demo.local">john.doe@sas-demo.local</a><span>+966 55 100 2001</span></div></article>
+        <article class="contact-card"><span class="avatar">FN</span><div><b>Fatima Noor</b><small>DMS Admin</small><a href="mailto:fatima.noor@sas-demo.local">fatima.noor@sas-demo.local</a><span>+966 55 100 2002</span></div></article>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="guideDialog" class="modal guide-modal">
+    <form method="dialog" class="share-form">
+      <header class="modal-head">
+        <div><h1>DMS User Manual</h1><p>Quick reference for using the Corporate DMS portal.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <div class="manual-doc">
+        <section><h3>1. Dashboard</h3><p>Use the dashboard to open Company Records, Project Documents, pending approvals and recent uploads.</p></section>
+        <section><h3>2. Upload Documents</h3><p>Select the document area, confirm the prefilled folder path, enter document metadata, attach the file and submit for approval.</p></section>
+        <section><h3>3. Folder Library</h3><p>Browse the left folder structure, open document details, preview files, share links, download documents or add documents to Bookmark.</p></section>
+        <section><h3>4. Approvals</h3><p>Review assigned documents, preview metadata, then approve or take action based on the approval workflow.</p></section>
+        <section><h3>5. Settings</h3><p>Admins can manage project creation, access, workflows, folder structure, departments and Settings visibility.</p></section>
+      </div>
+    </form>
+  </dialog>
+
   <dialog id="folderBrowserDialog" class="modal folder-browser-modal">
     <form method="dialog" class="folder-browser-form">
       <header class="modal-head">
@@ -392,6 +444,42 @@
     <form method="dialog">
       <header class="modal-head"><div><h1 id="previewTitle">Document Preview</h1><p>Read-only preview for client demo.</p></div><button class="icon-button" value="close"><span data-icon="x"></span></button></header>
       <div class="preview-page" id="previewContent"></div>
+    </form>
+  </dialog>
+
+  <dialog id="rejectDialog" class="modal reject-modal">
+    <form method="dialog" class="reject-form">
+      <header class="modal-head">
+        <div><h1>Reject Document</h1><p>Review the document details and enter the rejection reason.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <div class="reject-summary" id="rejectSummary"></div>
+      <label class="reject-comment">
+        <span>Rejection Comments <b>*</b></span>
+        <textarea id="rejectComment" rows="5" placeholder="Enter the reason for rejecting this document..."></textarea>
+      </label>
+      <div class="modal-actions">
+        <button class="btn ghost" value="cancel">Cancel</button>
+        <button class="btn danger" id="submitReject" value="submit"><span data-icon="x"></span>Reject Document</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="approveDialog" class="modal approve-modal">
+    <form method="dialog" class="approve-form">
+      <header class="modal-head">
+        <div><h1>Approve Document</h1><p>Review the document details and add approval comments if required.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <div class="approve-summary" id="approveSummary"></div>
+      <label class="approve-comment">
+        <span>Approval Comments <small>(Optional)</small></span>
+        <textarea id="approveComment" rows="5" placeholder="Add any approval comments for this document..."></textarea>
+      </label>
+      <div class="modal-actions">
+        <button class="btn ghost" value="cancel">Cancel</button>
+        <button class="btn primary" id="submitApprove" value="submit"><span data-icon="check"></span>Approve Document</button>
+      </div>
     </form>
   </dialog>
 

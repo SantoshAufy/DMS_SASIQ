@@ -3,13 +3,16 @@ const icons = {
   "badge-check": '<path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.78 4.78 4 4 0 0 1-6.74 0 4 4 0 0 1-4.78-4.78 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/>',
   "file-text": '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v6h6"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
   "project-box": '<path d="M3 7h18"/><path d="M7 3h10l2 4H5l2-4Z"/><rect width="18" height="14" x="3" y="7" rx="2"/><path d="M8 12h8"/><path d="M8 16h5"/>',
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.59 2.61a2 2 0 0 1-.45 2.11L8 9.69a16 16 0 0 0 6.31 6.31l1.25-1.25a2 2 0 0 1 2.11-.45c.84.27 1.71.47 2.61.59A2 2 0 0 1 22 16.92Z"/>',
   folder: '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z"/>',
   star: '<path d="m12 2 3.09 6.26L22 9.27l-5 4.88 1.18 6.88L12 17.77l-6.18 3.26L7 14.15 2 9.27l6.91-1.01Z"/>',
   bookmark: '<path d="M19 21 12 17 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/>',
   settings: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z"/><circle cx="12" cy="12" r="3"/>',
   "circle-help": '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"/><path d="M12 17h.01"/>',
   "chevrons-left": '<path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/>',
+  "chevrons-right": '<path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/>',
   "arrow-left": '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  "arrow-right": '<path d="m12 5 7 7-7 7"/><path d="M5 12h14"/>',
   search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
   x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
   menu: '<path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/>',
@@ -17,7 +20,6 @@ const icons = {
   "chevron-right": '<path d="m9 18 6-6-6-6"/>',
   "chevron-left": '<path d="m15 18-6-6 6-6"/>',
   upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/>',
-  "arrow-right": '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   briefcase: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M2 12h20"/>',
   filter: '<path d="M22 3H2l8 9.46V19l4 2v-8.54Z"/>',
   "layout-grid": '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
@@ -42,11 +44,12 @@ const icons = {
 const legacyIcons = {
   folder: "📁",
   "chevrons-left": "«",
+  "chevrons-right": "»",
   "arrow-left": "←",
+  "arrow-right": "→",
   "chevron-down": "⌄",
   "chevron-right": "›",
   "chevron-left": "‹",
-  "arrow-right": "→",
   briefcase: "💼",
   "folder-open": "📂",
   "cloud-upload": "⇪"
@@ -68,6 +71,8 @@ const documents = [
 let selectedDocument = documents[0];
 let folderBrowserRoot = null;
 let uploadPathLocked = false;
+let pendingRejection = null;
+let pendingApproval = null;
 
 const approvals = [
   {
@@ -80,7 +85,7 @@ const approvals = [
     ext: "pdf",
     documentType: "Corporate SOP",
     department: "Admin",
-    location: "General Documents > Admin > SOP",
+    location: "Company Records > Admin > SOP",
     uploadedOn: "20 May 2024 10:30",
     size: "1.8 MB",
     revision: "2.0",
@@ -98,7 +103,7 @@ const approvals = [
     ext: "docx",
     documentType: "Vendor Agreement",
     department: "Legal",
-    location: "General Documents > Legal > Agreements",
+    location: "Company Records > Legal > Agreements",
     uploadedOn: "20 May 2024 09:45",
     size: "2.6 MB",
     revision: "A",
@@ -141,6 +146,78 @@ const approvals = [
     confidentiality: "Internal Use",
     remarks: "Foundation drawing submitted for QA verification before release.",
     approvalPath: "QA Engineer > Quality Manager > Project Manager"
+  },
+  {
+    id: 4,
+    title: "ITP-MECH-002-Rev0.xlsx",
+    reference: "ITP-MECH-002",
+    stage: "Technical Review",
+    uploadedBy: "Sara Ali",
+    initials: "SA",
+    ext: "xlsx",
+    documentType: "Inspection Plan",
+    department: "Quality",
+    location: "Projects > Project_001 > Quality > Inspection & Test Plan",
+    uploadedOn: "18 May 2024 11:30",
+    size: "1.1 MB",
+    revision: "0",
+    confidentiality: "Internal Use",
+    remarks: "Mechanical AHU inspection plan submitted for discipline review.",
+    approvalPath: "Project Engineer > Quality Manager > Project Manager"
+  },
+  {
+    id: 5,
+    title: "HSE Method Statement.pdf",
+    reference: "HSE-METHOD-014",
+    stage: "HSE Review",
+    uploadedBy: "Ahmed Khan",
+    initials: "AK",
+    ext: "pdf",
+    documentType: "Method Statement",
+    department: "HSE",
+    location: "Projects > Project_002 > HSE > Reports",
+    uploadedOn: "17 May 2024 15:05",
+    size: "2.8 MB",
+    revision: "A",
+    confidentiality: "Internal Use",
+    remarks: "Method statement submitted for site safety review.",
+    approvalPath: "HSE Officer > HSE Manager > Project Manager"
+  },
+  {
+    id: 6,
+    title: "Main Contract Variation.pdf",
+    reference: "CON-VAR-009",
+    stage: "Commercial Review",
+    uploadedBy: "Fatima Noor",
+    initials: "FN",
+    ext: "pdf",
+    documentType: "Contract Variation",
+    department: "Contracts",
+    location: "Projects > Project_003 > Contracts > Main Contract",
+    uploadedOn: "16 May 2024 13:15",
+    size: "2.2 MB",
+    revision: "A",
+    confidentiality: "Confidential",
+    remarks: "Variation request submitted for commercial validation.",
+    approvalPath: "Contract Manager > Finance Manager > Construction Director"
+  },
+  {
+    id: 7,
+    title: "Material Receipt Note.xlsx",
+    reference: "MRN-PRJ-058",
+    stage: "Store Review",
+    uploadedBy: "John Doe",
+    initials: "JD",
+    ext: "xlsx",
+    documentType: "Material Receipt Note",
+    department: "Material Control",
+    location: "Projects > Project_004 > Material Control > Project Materials > MRR",
+    uploadedOn: "15 May 2024 10:40",
+    size: "980 KB",
+    revision: "0",
+    confidentiality: "Internal Use",
+    remarks: "Receipt note submitted for material control approval.",
+    approvalPath: "Store Keeper > Material Manager > Project Manager"
   }
 ];
 
@@ -210,7 +287,7 @@ function renderTable(id, rows, mode = "full") {
   table.innerHTML = `<thead><tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${
     rows.map(doc => mode === "recent" ? `
       <tr data-doc="${doc.id}">
-        <td>${fileCell(doc)}</td><td><span class="status draft">${doc.project === "Project_001" ? "Project Documents" : "General Documents"}</span></td><td>${doc.type}</td><td><span class="person"><i>${doc.by.split(" ").map(s => s[0]).join("")}</i>${doc.by}</span></td><td>${doc.id ? "Today, 9:30 AM" : "2 hrs ago"}</td><td><span class="status ${statusClass(doc.status)}">${doc.status}</span></td><td><button class="kebab" data-action="row-menu">${icon("more-vertical")}</button></td>
+        <td>${fileCell(doc)}</td><td><span class="status draft">${doc.project === "Project_001" ? "Project Documents" : "Company Records"}</span></td><td>${doc.type}</td><td><span class="person"><i>${doc.by.split(" ").map(s => s[0]).join("")}</i>${doc.by}</span></td><td>${doc.id ? "Today, 9:30 AM" : "2 hrs ago"}</td><td><span class="status ${statusClass(doc.status)}">${doc.status}</span></td><td><button class="kebab" data-action="row-menu">${icon("more-vertical")}</button></td>
       </tr>` : `
       <tr data-doc="${doc.id}">
         <td>${fileCell(doc, mode === "favorites")}</td><td>${doc.project}</td><td>${doc.ref}</td><td>${doc.subject}</td><td>${doc.type}</td><td>${doc.rev}</td><td><span class="status ${statusClass(doc.status)}">${doc.status}</span></td><td>${doc.date}</td><td>${doc.by}</td><td>${doc.size}</td><td><button class="kebab" data-action="row-menu">${icon("more-vertical")}</button></td>
@@ -219,9 +296,10 @@ function renderTable(id, rows, mode = "full") {
 }
 
 function renderMiniApprovals() {
+  const recentApprovals = approvals.slice(0, 4);
   document.getElementById("pendingApprovals").innerHTML = `
     <div class="approval-head-mini"><span>Document</span><span>Status</span><span>Uploaded By</span></div>
-  ` + approvals.map(item => `
+  ` + recentApprovals.map(item => `
     <div class="approval-row">
       <span class="file-icon ${item.ext}">${item.ext.toUpperCase()}</span>
       <span><b>${item.title}</b><small>${item.reference}</small></span>
@@ -232,13 +310,18 @@ function renderMiniApprovals() {
 
 function renderKanban() {
   const buckets = ["approvalCol1", "approvalCol2", "approvalCol3"];
+  buckets.forEach(id => { document.getElementById(id).innerHTML = ""; });
   approvals.forEach((item, index) => {
     document.getElementById(buckets[index % 3]).innerHTML += `
       <article class="approval-card">
         <span class="file-name"><span class="file-icon ${item.ext}">${item.ext.toUpperCase()}</span>${item.title}</span>
         <small>${item.reference} | Uploaded by ${item.uploadedBy}</small>
         <span class="status review">${item.stage}</span>
-        <div class="approval-actions"><button class="btn ghost" data-action="preview-approval" data-approval-id="${item.id}">Preview</button><button class="btn primary" data-action="approve">Approve</button></div>
+        <div class="approval-actions">
+          <button class="btn ghost" data-action="preview-approval" data-approval-id="${item.id}">Preview</button>
+          <button class="btn primary" data-action="approve" data-approval-id="${item.id}">Approve</button>
+          <button class="btn danger" data-action="reject-approval" data-approval-id="${item.id}">Reject</button>
+        </div>
       </article>`;
   });
 }
@@ -248,9 +331,11 @@ function renderTree(id, items) {
     const hasChildren = item.children && item.children.length;
     const path = [...parents, item.label].join(" > ");
     const childHtml = hasChildren && item.open ? walk(item.children, level + 1, [...parents, item.label]) : "";
+    const isRoot = level === 0;
+    const visualIcon = isRoot ? (item.label === "Company" ? "project-box" : "briefcase") : "folder";
     return `
-      <button class="tree-node indent-${Math.min(level, 5)} ${item.active ? "active" : ""}" data-folder="${item.label}" data-path="${path}" data-has-children="${hasChildren ? "true" : "false"}">
-        <span>${hasChildren ? icon(item.open ? "chevron-down" : "chevron-right") : ""}</span>${icon("folder")}<span>${item.label}</span>
+      <button class="tree-node indent-${Math.min(level, 5)} level-${Math.min(level, 5)} ${isRoot ? "root-node" : ""} ${item.active ? "active" : ""}" data-folder="${item.label}" data-path="${path}" data-has-children="${hasChildren ? "true" : "false"}">
+        <span class="tree-caret">${hasChildren ? icon(item.open ? "chevron-down" : "chevron-right") : ""}</span><span class="tree-folder-icon">${icon(visualIcon)}</span><span class="tree-label">${item.label}</span>
       </button>${childHtml}`;
   }).join("");
   document.getElementById(id).innerHTML = walk(items);
@@ -345,6 +430,10 @@ function openDocumentDetailsFromAnyView(row) {
     openDetails("projectDetails", doc);
     return;
   }
+  if (row.closest("#view-favorites")) {
+    openDetails("bookmarkDetails", doc);
+    return;
+  }
   if (!row.closest("#view-documents")) showView("documents");
   openDetails("detailsPanel", doc);
 }
@@ -389,6 +478,69 @@ function renderBookmarks() {
   document.getElementById("favoritesCount").textContent = rows.length
     ? `Showing 1 to ${rows.length} of ${rows.length} bookmarked documents`
     : "No bookmarked documents found";
+}
+
+function updateReportKpis() {
+  const area = document.getElementById("reportAreaFilter")?.value || "Project Records";
+  const department = document.getElementById("reportDepartmentFilter")?.value || "All Departments";
+  const project = document.getElementById("reportProjectFilter")?.value || "All Projects";
+  const status = document.getElementById("reportStatusFilter")?.value || "All Statuses";
+  const period = document.getElementById("reportPeriodFilter")?.value || "This Month";
+  let total = 124;
+  let approved = 86;
+  let review = 24;
+  let pending = 14;
+  if (area === "Company Records") {
+    total = 58; approved = 39; review = 12; pending = 7;
+  }
+  if (department === "Quality") {
+    total = 32; approved = 22; review = 7; pending = 3;
+  } else if (department === "HSE") {
+    total = 15; approved = 11; review = 2; pending = 2;
+  } else if (department === "Admin") {
+    total = 18; approved = 13; review = 3; pending = 2;
+  } else if (department === "Finance & Accounting") {
+    total = 22; approved = 15; review = 4; pending = 3;
+  } else if (department === "Technical") {
+    total = 28; approved = 18; review = 6; pending = 4;
+  } else if (department === "Contracts") {
+    total = 18; approved = 14; review = 3; pending = 1;
+  }
+  if (area === "Project Records" && project === "Project_001") {
+    total = 46; approved = 32; review = 9; pending = 5;
+  } else if (area === "Project Records" && project === "Project_002") {
+    total = 21; approved = 13; review = 5; pending = 3;
+  } else if (area === "Project Records" && project === "Project_003") {
+    total = 16; approved = 10; review = 4; pending = 2;
+  } else if (area === "Project Records" && project === "Project_004") {
+    total = 13; approved = 8; review = 3; pending = 2;
+  }
+  if (status !== "All Statuses") {
+    const focused = { Approved: approved, "Under Review": review, Pending: pending, Rejected: 4 }[status] || total;
+    total = focused;
+    approved = status === "Approved" ? focused : Math.max(0, Math.round(focused * 0.18));
+    review = status === "Under Review" ? focused : Math.max(0, Math.round(focused * 0.14));
+    pending = status === "Pending" ? focused : Math.max(0, Math.round(focused * 0.1));
+  }
+  const periodFactor = { "This Week": 0.32, "Last 30 Days": 0.82, "This Year": 2.4 }[period] || 1;
+  total = Math.max(1, Math.round(total * periodFactor));
+  approved = Math.max(0, Math.round(approved * periodFactor));
+  review = Math.max(0, Math.round(review * periodFactor));
+  pending = Math.max(0, Math.round(pending * periodFactor));
+  document.getElementById("reportTotal").textContent = total;
+  document.getElementById("reportApproved").textContent = approved;
+  document.getElementById("reportReview").textContent = review;
+  document.getElementById("reportPending").textContent = pending;
+  document.getElementById("reportTotalNote").textContent = period === "This Year" ? "Year to date" : `Filtered by ${period.toLowerCase()}`;
+  document.getElementById("reportApprovedNote").textContent = `${Math.round((approved / Math.max(total, 1)) * 100)}% completion`;
+  document.getElementById("reportReviewNote").textContent = status === "Under Review" ? "Selected status" : "With approvers";
+  document.getElementById("reportPendingNote").textContent = status === "Pending" ? "Selected status" : "Awaiting action";
+}
+
+function syncReportFilters() {
+  const isProject = document.getElementById("reportAreaFilter")?.value === "Project Records";
+  document.getElementById("reportProjectFilter")?.classList.toggle("hidden", !isProject);
+  updateReportKpis();
 }
 
 function renderSearchResults() {
@@ -477,6 +629,7 @@ function openDetails(panelId, doc) {
   hydrateIcons(panel);
   panel.classList.add("open");
   panel.closest(".split-layout")?.classList.add("details-open");
+  panel.closest(".bookmark-layout")?.classList.add("details-open");
 }
 
 function closeDetails(panel) {
@@ -484,6 +637,7 @@ function closeDetails(panel) {
   if (!detailsPanel) return;
   detailsPanel.classList.remove("open");
   detailsPanel.closest(".split-layout")?.classList.remove("details-open");
+  detailsPanel.closest(".bookmark-layout")?.classList.remove("details-open");
 }
 
 function renderDocumentPreview(doc = selectedDocument) {
@@ -571,6 +725,33 @@ function renderPreview(data = documents[0]) {
   `;
 }
 
+function approvalSummaryHtml(item) {
+  return `
+    <div><span>Document Name</span><b>${item.title}</b></div>
+    <div><span>Reference Number</span><b>${item.reference}</b></div>
+    <div><span>Document Type</span><b>${item.documentType}</b></div>
+    <div><span>Department</span><b>${item.department}</b></div>
+    <div><span>Current Stage</span><b>${item.stage}</b></div>
+    <div><span>Uploaded By</span><b>${item.uploadedBy}</b></div>
+    <div><span>Uploaded On</span><b>${item.uploadedOn}</b></div>
+    <div><span>Location</span><b>${item.location}</b></div>
+  `;
+}
+
+function openRejectDialog(item) {
+  pendingRejection = item;
+  document.getElementById("rejectSummary").innerHTML = approvalSummaryHtml(item);
+  document.getElementById("rejectComment").value = "";
+  document.getElementById("rejectDialog").showModal();
+}
+
+function openApproveDialog(item) {
+  pendingApproval = item;
+  document.getElementById("approveSummary").innerHTML = approvalSummaryHtml(item);
+  document.getElementById("approveComment").value = "";
+  document.getElementById("approveDialog").showModal();
+}
+
 function applyFilters() {
   const q = (document.getElementById("folderSearch")?.value || "").toLowerCase();
   const status = document.getElementById("statusFilter")?.value || "";
@@ -594,12 +775,277 @@ function showView(view) {
   document.querySelector(".app-shell").classList.remove("mobile-open");
 }
 
+function setSidebarState(state) {
+  const shell = document.querySelector(".app-shell");
+  shell.dataset.sidebar = state;
+  const iconName = state === "closed" ? "chevrons-right" : "chevrons-left";
+  document.getElementById("sidebarToggleTop").innerHTML = icon(iconName);
+  hydrateIcons(document.getElementById("sidebarToggleTop"));
+  const bottomIcon = state === "closed" ? "arrow-right" : "arrow-left";
+  document.getElementById("sidebarToggleBottom").querySelector("span:first-child").outerHTML = `<span data-icon="${bottomIcon}"></span>`;
+  hydrateIcons(document.getElementById("sidebarToggleBottom"));
+}
+
 function toast(message) {
   const el = document.getElementById("toast");
   el.textContent = message;
   el.classList.add("show");
   clearTimeout(window.toastTimer);
   window.toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+const settingsSelects = {
+  users: ["Jane Doe", "Ahmed Khan", "Sara Ali", "John Doe", "Fatima Noor", "Mohammed Raza", "Lisa Ray"],
+  permissions: ["Full Control", "Contributor", "Upload", "View", "Download", "Read"],
+  areas: ["Company Records", "Project"],
+  departments: ["Quality", "HSE", "Admin", "Finance & Accounting", "Material Management", "Technical", "Project DCC", "Accounting"],
+  projects: ["Project_001", "Project_002", "Project_003", "Project_004"],
+  folders: [
+    "Company Records > Quality > Inspection & Test Plans",
+    "Company Records > HSE > Reports",
+    "Company Records > Admin > HR",
+    "Projects > Project_001 > Quality > Inspection & Test Plan",
+    "Projects > Project_001 > Technical > Shop Drawings",
+    "Projects > Project_001 > Contracts > Main Contract"
+  ]
+};
+
+const folderCatalog = {
+  General: {
+    Quality: ["Project Quality Plan (General)", "Construction Quality Plan", "Inspection & Test Plans"],
+    HSE: ["Policies & Plans", "Standard Operating Procedures", "Safe Work Method Statements", "Forms & Formats", "Reports"],
+    Admin: ["Company Doc", "Admin Orders / Official Letters", "Attendance", "HR", "Assets Docs", "Utilities"],
+    "Finance & Accounting": ["Accounting", "Audit"],
+    "Material Management": ["Non-Accounting Stock Issue Note", "Financial Issue Note", "Asset Issue Note", "Non-Accounting Receipt Note", "Financial Receipt Note", "Transfer Note"],
+    Audit: ["Contracts", "Financial Settlement", "Bonds & Guarantees"],
+    Projects: ["Completed Projects", "Ongoing Projects", "Standard Construction Docs"],
+    ISO: ["Default Folder"]
+  },
+  Project: {
+    Quality: ["Inspection & Test Plan", "Project Quality Plan", "RFI's", "Reports", "Hand Over"],
+    HSE: ["Project HSE Plan", "Permits", "Reports"],
+    Admin: ["Employee", "Timesheet"],
+    Planning: ["Schedule", "Reports", "QS & Invoices", "Photos"],
+    "Material Control": ["Local Material Store", "Project Materials", "MRR", "MOR", "Shipment Docs", "Others"],
+    Contracts: ["Main Contract", "Material Supply", "Work Execution"],
+    Construction: ["Construction / Execution Plan", "Method Statements of All Disciplines", "Procedures of All Disciplines"],
+    Technical: ["Technical Proposals", "Shop Drawings"],
+    "Project DCC": ["Project Correspondence Letters", "Document Transmittal", "Project Documents and Specification", "Project Drawings", "Project Generated Documents of All Disciplines"],
+    Accounting: ["Salaries", "Maintenance", "Food Expenses", "SubCon Invoices", "Oil & Fuel", "Workers Wages", "Machineries Rental", "Utilities / Others"]
+  }
+};
+
+function options(items, selected = "") {
+  return items.map(item => `<option${item === selected ? " selected" : ""}>${item}</option>`).join("");
+}
+
+function multiOptions(items, selected = []) {
+  return items.map(item => `<option${selected.includes(item) ? " selected" : ""}>${item}</option>`).join("");
+}
+
+function field(label, control) {
+  return `<label><span class="field-label">${label}</span>${control}</label>`;
+}
+
+function peoplePicker(selected = []) {
+  return `<div class="people-picker" role="group" aria-label="People picker">
+    <div class="people-chips">${selected.map(name => `<span>${name}<button type="button" aria-label="Remove ${name}">x</button></span>`).join("")}</div>
+    <input list="peopleOptions" placeholder="Search and add user">
+    <datalist id="peopleOptions">${settingsSelects.users.map(name => `<option value="${name}"></option>`).join("")}</datalist>
+  </div>`;
+}
+
+function settingsFolderChecks(scope = "General") {
+  const catalogKey = scope === "Company Records" ? "General" : scope;
+  const label = scope === "General" ? "Company Records" : scope;
+  const catalog = folderCatalog[catalogKey];
+  const departments = Object.keys(catalog);
+  const folderNames = departments.flatMap(dept => catalog[dept].map(folder => `${dept} > ${folder}`));
+  return `
+    <section class="settings-dialog-section">
+      <h3>${label} Departments</h3>
+      <div class="check-grid">
+        ${departments.map((dept, index) => `<label><input type="checkbox"${index < 2 ? " checked" : ""}> ${dept}</label>`).join("")}
+      </div>
+    </section>
+    <section class="settings-dialog-section">
+      <h3>${label} Folders</h3>
+      <div class="check-grid">
+        ${folderNames.slice(0, 10).map((folder, index) => `<label><input type="checkbox"${index < 3 ? " checked" : ""}> ${folder}</label>`).join("")}
+      </div>
+    </section>`;
+}
+
+function existingFolderList(area = "Project", department = "Quality") {
+  const folders = folderCatalog[area]?.[department] || [];
+  const areaLabel = area === "General" ? "Company Records" : area;
+  return `<div class="existing-folder-list"><b>Existing ${areaLabel} folders under ${department}</b>${folders.map(folder => `<span>${folder}</span>`).join("")}</div>`;
+}
+
+function openSettingsDialog(actionName) {
+  const dialog = document.getElementById("settingsDialog");
+  const title = document.getElementById("settingsDialogTitle");
+  const subtitle = document.getElementById("settingsDialogSubtitle");
+  const body = document.getElementById("settingsDialogBody");
+  const editMode = actionName.includes("edit");
+  const content = {
+    "settings-invite-user": {
+      title: "Add User Access",
+      subtitle: "Select multiple users, departments, folders and permission level.",
+      html: `
+        <div class="settings-form-grid">
+          ${field("Users", peoplePicker(["Jane Doe", "Lisa Ray"]))}
+          ${field("Access Scope", `<select id="accessScopeSelect">${options(["Company Records", "Project"], "Company Records")}</select>`)}
+          ${field("Permission Level", `<select>${options(settingsSelects.permissions, "Contributor")}</select>`)}
+          ${field("Status", `<select>${options(["Active", "Inactive"])}</select>`)}
+        </div><div id="accessFolderPicker">${settingsFolderChecks("Company Records")}</div>`
+    },
+    "settings-edit-access": {
+      title: "Edit User Access",
+      subtitle: "Update folder-level access for the selected user.",
+      html: `
+        <div class="settings-form-grid">
+          ${field("Users", peoplePicker(["Ahmed Khan", "Sara Ali"]))}
+          ${field("Access Scope", `<select id="accessScopeSelect">${options(["Project", "Company Records"], "Project")}</select>`)}
+          ${field("Permission Level", `<select>${options(settingsSelects.permissions, "Full Control")}</select>`)}
+          ${field("Status", `<select>${options(["Active", "Inactive"], "Active")}</select>`)}
+        </div><div id="accessFolderPicker">${settingsFolderChecks("Project")}</div>`
+    },
+    "settings-create-project": {
+      title: "Add Project",
+      subtitle: "Create the project record and assign initial permissions.",
+      html: `
+        <div class="settings-form-grid">
+          ${field("Project Name", `<input value="Project Alpha">`)}
+          ${field("Project Number", `<input value="PRJ-005">`)}
+          ${field("Client", `<input value="New Client LLC">`)}
+          ${field("Project Status", `<select>${options(["Ongoing", "Completed", "On Hold"])}</select>`)}
+        </div>
+        <section class="settings-dialog-section">
+          <h3>Project Members</h3>
+          <div class="settings-form-grid">
+            ${field("Users", peoplePicker(["Sara Ali", "John Doe", "Fatima Noor"]))}
+            ${field("Status", `<select>${options(["Active", "Inactive"])}</select>`)}
+          </div>
+        </section>`
+    },
+    "settings-edit-project-members": {
+      title: "Edit Project Members",
+      subtitle: "Project details are locked. Only member permissions can be updated.",
+      html: `
+        <section class="settings-dialog-section">
+          <h3>Project_001 Members</h3>
+          <div class="settings-form-grid">
+            ${field("Users", peoplePicker(["Ahmed Khan", "Sara Ali", "John Doe", "Fatima Noor"]))}
+            ${field("Status", `<select>${options(["Active", "Inactive"])}</select>`)}
+          </div>
+        </section>
+        <table class="mini-settings-table"><thead><tr><th>Current Members</th></tr></thead><tbody><tr><td>Ahmed Khan, Sara Ali, John Doe, Fatima Noor</td></tr></tbody></table>`
+    },
+    "settings-add-workflow": {
+      title: "Create Workflow",
+      subtitle: "Select document area, department, folder and two approval levels.",
+      html: workflowFields()
+    },
+    "settings-edit-workflow": {
+      title: "Edit Workflow",
+      subtitle: "Update the selected workflow approvers.",
+      html: workflowFields(true)
+    },
+    "settings-create-folder": {
+      title: "Add Folder",
+      subtitle: "Create a folder under the selected hierarchy level.",
+      html: `
+        <div class="settings-form-grid">
+          ${field("Document Area", `<select id="folderAreaSelect">${options(["Project", "Company Records"], "Project")}</select>`)}
+          ${field("Department", `<select id="folderDepartmentSelect">${options(Object.keys(folderCatalog.Project), "Technical")}</select>`)}
+          ${field("New Folder Name", `<input value="As Built Drawings">`)}
+        </div>
+        <section class="settings-dialog-section" id="existingFolderPreview">${existingFolderList("Project", "Technical")}</section>`
+    },
+    "settings-create-department": {
+      title: "Create Department",
+      subtitle: "Add a new department under General or Project documents.",
+      html: departmentFields()
+    },
+    "settings-add-admin": {
+      title: "Add Admin User",
+      subtitle: "Only listed admins can see the Settings icon.",
+      html: adminFields()
+    },
+    "settings-edit-admin": {
+      title: "Edit Admin User",
+      subtitle: "Update Settings module visibility for this admin.",
+      html: adminFields(true)
+    }
+  }[actionName];
+  if (!content) return;
+  title.textContent = content.title;
+  subtitle.textContent = content.subtitle;
+  body.innerHTML = content.html;
+  const folderArea = body.querySelector("#folderAreaSelect");
+  const folderDepartment = body.querySelector("#folderDepartmentSelect");
+  const accessScope = body.querySelector("#accessScopeSelect");
+  const accessFolderPicker = body.querySelector("#accessFolderPicker");
+  if (accessScope && accessFolderPicker) {
+    accessScope.addEventListener("change", () => {
+      accessFolderPicker.innerHTML = settingsFolderChecks(accessScope.value);
+    });
+  }
+  const refreshFolderPreview = (resetDepartments = false) => {
+    if (!folderArea || !folderDepartment) return;
+    const area = folderArea.value;
+    const catalogKey = area === "Company Records" ? "General" : area;
+    const departments = Object.keys(folderCatalog[catalogKey] || {});
+    if (resetDepartments || !departments.includes(folderDepartment.value)) {
+      folderDepartment.innerHTML = options(departments, departments[0]);
+    }
+    const preview = body.querySelector("#existingFolderPreview");
+    if (preview) preview.innerHTML = existingFolderList(catalogKey, folderDepartment.value);
+  };
+  if (folderArea && folderDepartment) {
+    folderArea.addEventListener("change", () => refreshFolderPreview(true));
+    folderDepartment.addEventListener("change", () => refreshFolderPreview(false));
+  }
+  document.getElementById("settingsDialogSave").innerHTML = `${icon("check")}${editMode ? "Update" : "Save"}`;
+  hydrateIcons(dialog);
+  dialog.showModal();
+}
+
+function workflowFields(edit = false) {
+  return `<div class="settings-form-grid">
+    ${field("Document Area", `<select>${options(settingsSelects.areas, edit ? "Project" : "Company Records")}</select>`)}
+    ${field("Department", `<select>${options(settingsSelects.departments, edit ? "Quality" : "HSE")}</select>`)}
+    ${field("Folder", `<select>${options(settingsSelects.folders, edit ? "Projects > Project_001 > Quality > Inspection & Test Plan" : "Company Records > HSE > Reports")}</select>`)}
+    ${field("Workflow Name", `<input value="${edit ? "Quality Docs Approval" : "HSE Reports Approval"}">`)}
+    ${field("Approver 1", peoplePicker([edit ? "Ahmed Khan" : "Sara Ali"]))}
+    ${field("Approver 2", peoplePicker(["John Doe"]))}
+  </div>`;
+}
+
+function departmentFields(edit = false) {
+  return `<div class="settings-form-grid">
+    ${field("Document Area", `<select>${options(settingsSelects.areas, edit ? "Project" : "Company Records")}</select>`)}
+    ${field("Department Name", `<input value="${edit ? "Technical" : "Procurement"}">`)}
+  </div>`;
+}
+
+function adminFields(edit = false) {
+  return `<div class="settings-form-grid">
+    ${field("User", peoplePicker([edit ? "Fatima Noor" : "Mohammed Raza"]))}
+    ${field("Status", `<select>${options(["Active", "Inactive"])}</select>`)}
+  </div>
+  <section class="settings-dialog-section">
+    <h3>Settings Access</h3>
+    <div class="check-grid">
+      <label><input type="checkbox" checked> Roles & Access</label>
+      <label><input type="checkbox" checked> Project Creation</label>
+      <label><input type="checkbox"${edit ? "" : " checked"}> Workflow Management</label>
+      <label><input type="checkbox"${edit ? "" : " checked"}> Folder Structure</label>
+      <label><input type="checkbox"> Department Management</label>
+      <label><input type="checkbox"> Admin Users</label>
+    </div>
+  </section>`;
 }
 
 function init() {
@@ -614,6 +1060,7 @@ function init() {
   setUploadPath("Projects > Project_001 > Quality > Inspection & Test Plan");
   renderBookmarks();
   renderSearchResults();
+  updateReportKpis();
   document.getElementById("documentCount").textContent = "Showing 1 to 9 of 9 items";
   hydrateIcons();
 
@@ -646,10 +1093,19 @@ function init() {
         if (isBrowserTree) renderFolderBrowser();
       }
       hydrateIcons(folder.closest(".folder-tree, .folder-browser-tree") || document);
-      if (!isBrowserTree) document.getElementById("folderName").textContent = folder.dataset.folder;
       if (isGeneralTree) {
+        document.getElementById("folderName").textContent = folder.dataset.folder;
         document.getElementById("docCrumbs").innerHTML = folder.dataset.path.split(" > ").join(` ${icon("chevron-right")} `);
         hydrateIcons(document.getElementById("docCrumbs"));
+      }
+      if (isProjectTree) {
+        const parts = folder.dataset.path.split(" > ");
+        const projectName = parts.find(part => /^Project_\d+/.test(part)) || "Project_001";
+        const folderName = folder.dataset.folder === projectName ? projectName : `${projectName} - ${folder.dataset.folder}`;
+        document.getElementById("projectFolderName").textContent = folderName;
+        document.getElementById("projectFolderHint").textContent = `You are viewing ${folder.dataset.path}.`;
+        document.getElementById("projectCrumbs").innerHTML = parts.join(` ${icon("chevron-right")} `);
+        hydrateIcons(document.getElementById("projectCrumbs"));
       }
     }
     if (row && actionName !== "row-menu" && !event.target.closest("#rowActionMenu")) {
@@ -675,8 +1131,19 @@ function init() {
     }
     if (name === "toggle-bookmark-filters") document.getElementById("bookmarkFilters").classList.toggle("open");
     if (name === "toggle-search-filters") document.getElementById("searchFilters").classList.toggle("open");
-    if (name?.startsWith("settings-")) toast("Settings action completed");
-    if (name?.startsWith("reports-")) toast("Report action completed");
+    if (name?.startsWith("settings-")) {
+      if (name === "settings-save" || name === "settings-sync-folders") {
+        toast(name === "settings-sync-folders" ? "Folder structure synced" : "Settings saved");
+      } else {
+        openSettingsDialog(name);
+      }
+    }
+    if (name?.startsWith("reports-")) {
+      updateReportKpis();
+      toast("Report refreshed");
+    }
+    if (name === "contact-admin") document.getElementById("contactAdminDialog").showModal();
+    if (name === "open-guide") document.getElementById("guideDialog").showModal();
     if (name === "open-folder-browser") {
       folderBrowserRoot = currentUploadRoot();
       renderFolderBrowser();
@@ -697,7 +1164,13 @@ function init() {
       renderVersionHistory(selectedDocument);
       document.getElementById("versionDialog").showModal();
     }
-    if (name === "approve") toast("Document approved");
+    if (name === "approve") {
+      const item = approvals[Number(action.dataset.approvalId)] || approvals[0];
+      openApproveDialog(item);
+    }
+    if (name === "reject-approval") {
+      openRejectDialog(approvals[Number(action.dataset.approvalId)] || approvals[0]);
+    }
     if (name === "bulk-approve") toast("Selected approvals marked approved");
     if (name === "preview-approval") {
       renderPreview(approvals[Number(action.dataset.approvalId)] || approvals[0]);
@@ -721,11 +1194,34 @@ function init() {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", renderSearchResults);
   });
+  ["reportAreaFilter", "reportProjectFilter", "reportDepartmentFilter", "reportStatusFilter", "reportPeriodFilter"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("input", id === "reportAreaFilter" ? syncReportFilters : updateReportKpis);
+      el.addEventListener("change", id === "reportAreaFilter" ? syncReportFilters : updateReportKpis);
+    }
+  });
+  document.querySelectorAll("[data-tree-search]").forEach(input => {
+    input.addEventListener("input", () => {
+      const tree = document.getElementById(input.dataset.treeSearch);
+      const query = input.value.trim().toLowerCase();
+      tree?.querySelectorAll(".tree-node").forEach(node => {
+        node.classList.toggle("hidden", query && !node.dataset.path.toLowerCase().includes(query));
+      });
+    });
+  });
   document.querySelectorAll("[data-settings-tab]").forEach(tab => {
     tab.addEventListener("click", () => {
       const target = tab.dataset.settingsTab;
       document.querySelectorAll(".settings-tab").forEach(item => item.classList.toggle("active", item === tab));
       document.querySelectorAll(".settings-panel").forEach(panel => panel.classList.toggle("active", panel.id === `settings-${target}`));
+    });
+  });
+  document.querySelectorAll("[data-folder-tab]").forEach(tab => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.folderTab;
+      document.querySelectorAll("[data-folder-tab]").forEach(item => item.classList.toggle("active", item === tab));
+      document.querySelectorAll(".folder-structure-panel").forEach(panel => panel.classList.toggle("active", panel.id === `folder-structure-${target}`));
     });
   });
   document.getElementById("globalSearch").addEventListener("input", event => {
@@ -743,8 +1239,8 @@ function init() {
     document.getElementById("clearSearch").classList.remove("visible");
     renderSearchResults();
   });
-  document.getElementById("sidebarToggleTop").addEventListener("click", () => document.querySelector(".app-shell").dataset.sidebar = document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open");
-  document.getElementById("sidebarToggleBottom").addEventListener("click", () => document.querySelector(".app-shell").dataset.sidebar = document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open");
+  document.getElementById("sidebarToggleTop").addEventListener("click", () => setSidebarState(document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open"));
+  document.getElementById("sidebarToggleBottom").addEventListener("click", () => setSidebarState(document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open"));
   document.getElementById("mobileMenu").addEventListener("click", () => document.querySelector(".app-shell").classList.toggle("mobile-open"));
   document.getElementById("submitUpload").addEventListener("click", () => toast("Document submitted for approval"));
   document.getElementById("clearFavorites").addEventListener("click", () => {
@@ -759,6 +1255,20 @@ function init() {
     navigator.clipboard?.writeText(input.value).catch(() => {});
     toast(`Share link copied for ${document.getElementById("shareEmployee").value || "employee"}`);
   });
+  document.getElementById("submitReject").addEventListener("click", event => {
+    const comment = document.getElementById("rejectComment").value.trim();
+    if (!comment) {
+      event.preventDefault();
+      toast("Please enter rejection comments");
+      return;
+    }
+    toast(`${pendingRejection?.reference || "Document"} rejected with comments`);
+  });
+  document.getElementById("submitApprove").addEventListener("click", () => {
+    const comment = document.getElementById("approveComment").value.trim();
+    toast(comment ? `${pendingApproval?.reference || "Document"} approved with comments` : `${pendingApproval?.reference || "Document"} approved`);
+  });
+  document.getElementById("settingsDialogSave").addEventListener("click", () => toast("Settings record saved"));
   document.getElementById("applyFolderPath").addEventListener("click", () => {
     const active = document.querySelector("#folderBrowserTree .tree-node.active");
     if (active) setUploadPath(active.dataset.path);

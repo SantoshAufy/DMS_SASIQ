@@ -65,6 +65,7 @@ const documents = [
 
 let selectedDocument = documents[0];
 let folderBrowserRoot = null;
+let uploadPathLocked = false;
 
 const approvals = [
   {
@@ -294,8 +295,79 @@ function renderFolderBrowser() {
 function setUploadPath(path) {
   const container = document.getElementById("uploadPath");
   container.dataset.path = path;
-  container.innerHTML = `${path.split(" > ").join(` ${icon("chevron-right")} `)} <button type="button" class="btn outline-accent small" data-action="open-folder-browser"><span data-icon="folder-open"></span>Browse</button>`;
+  container.classList.toggle("locked", uploadPathLocked);
+  container.innerHTML = `${path.split(" > ").join(` ${icon("chevron-right")} `)} ${
+    uploadPathLocked
+      ? `<span class="locked-path">${icon("lock")}Selected location</span>`
+      : `<button type="button" class="btn outline-accent small" data-action="open-folder-browser"><span data-icon="folder-open"></span>Browse</button>`
+  }`;
   hydrateIcons(container);
+}
+
+function activeTreePath(treeId, fallback) {
+  return document.querySelector(`#${treeId} .tree-node.active`)?.dataset.path || fallback;
+}
+
+function prepareUploadDialog(source = "home") {
+  const deptRadios = [...document.querySelectorAll('input[name="dept"]')];
+  const projectField = document.getElementById("projectSelectField");
+  const projectSelect = document.getElementById("uploadProjectSelect");
+  uploadPathLocked = source !== "home";
+  deptRadios.forEach(radio => { radio.disabled = uploadPathLocked; });
+  projectSelect.disabled = uploadPathLocked;
+
+  if (source === "documents") {
+    deptRadios.find(radio => radio.value === "Company").checked = true;
+    projectField.classList.add("hidden");
+    setUploadPath(activeTreePath("generalTree", "Company > Quality > Inspection & Test Plans"));
+  } else if (source === "projects") {
+    deptRadios.find(radio => radio.value === "Project").checked = true;
+    projectField.classList.remove("hidden");
+    const path = activeTreePath("projectTree", `Projects > ${projectSelect.value} > Quality > Inspection & Test Plan`);
+    const projectMatch = path.match(/Project_\d+/);
+    if (projectMatch) projectSelect.value = projectMatch[0];
+    setUploadPath(path);
+  } else {
+    deptRadios.find(radio => radio.value === "Project").checked = true;
+    projectField.classList.remove("hidden");
+    setUploadPath(`Projects > ${projectSelect.value} > Quality > Inspection & Test Plan`);
+  }
+
+  document.getElementById("uploadDialog").showModal();
+}
+
+function openDocumentDetailsFromAnyView(row) {
+  const doc = documents[Number(row.dataset.doc)];
+  selectedDocument = doc;
+  if (row.closest("#view-projects")) {
+    openDetails("projectDetails", doc);
+    return;
+  }
+  if (!row.closest("#view-documents")) showView("documents");
+  openDetails("detailsPanel", doc);
+}
+
+function closeRowMenu() {
+  const menu = document.getElementById("rowActionMenu");
+  menu.classList.remove("open");
+  menu.setAttribute("aria-hidden", "true");
+}
+
+function openRowMenu(button, doc) {
+  selectedDocument = doc;
+  const menu = document.getElementById("rowActionMenu");
+  const rect = button.getBoundingClientRect();
+  menu.innerHTML = `
+    <button data-action="download">${icon("download")}Download</button>
+    <button data-action="preview">${icon("eye")}Preview</button>
+    <button data-action="share">${icon("share")}Share</button>
+    <button data-action="add-favorite">${icon("bookmark")}Bookmark</button>
+  `;
+  menu.style.top = `${rect.bottom + 8}px`;
+  menu.style.left = `${Math.max(12, Math.min(rect.left - 150, window.innerWidth - 230))}px`;
+  menu.classList.add("open");
+  menu.setAttribute("aria-hidden", "false");
+  hydrateIcons(menu);
 }
 
 function renderBookmarks() {
@@ -547,8 +619,10 @@ function init() {
     const viewButton = event.target.closest("[data-view]");
     const viewLink = event.target.closest("[data-view-link]");
     const action = event.target.closest("[data-action]");
+    const actionName = action?.dataset.action;
     const row = event.target.closest("tr[data-doc]");
     const folder = event.target.closest("[data-folder]");
+    if (!event.target.closest("#rowActionMenu") && actionName !== "row-menu") closeRowMenu();
     if (viewButton) showView(viewButton.dataset.view);
     if (viewLink) showView(viewLink.dataset.viewLink);
     if (folder) {
@@ -576,15 +650,8 @@ function init() {
         hydrateIcons(document.getElementById("docCrumbs"));
       }
     }
-    if (row && row.closest("#view-search")) {
-      selectedDocument = documents[Number(row.dataset.doc)];
-      renderDocumentPreview(selectedDocument);
-      document.getElementById("previewDialog").showModal();
-    }
-    if (row && row.closest("#view-documents, #view-projects")) {
-      const doc = documents[Number(row.dataset.doc)];
-      const panelId = row.closest("#view-projects") ? "projectDetails" : "detailsPanel";
-      openDetails(panelId, doc);
+    if (row && actionName !== "row-menu" && !event.target.closest("#rowActionMenu")) {
+      openDocumentDetailsFromAnyView(row);
     }
     const layoutButton = event.target.closest("[data-layout]");
     if (layoutButton) {
@@ -595,8 +662,15 @@ function init() {
       tableCard?.classList.toggle("list-mode", layoutButton.dataset.layout === "list");
     }
     if (!action) return;
-    const name = action.dataset.action;
-    if (name === "open-upload") document.getElementById("uploadDialog").showModal();
+    const name = actionName;
+    if (name === "open-upload") {
+      const source = action.closest("#view-documents") ? "documents" : action.closest("#view-projects") ? "projects" : "home";
+      prepareUploadDialog(source);
+    }
+    if (name === "row-menu") {
+      const menuRow = action.closest("tr[data-doc]");
+      if (menuRow) openRowMenu(action, documents[Number(menuRow.dataset.doc)]);
+    }
     if (name === "toggle-bookmark-filters") document.getElementById("bookmarkFilters").classList.toggle("open");
     if (name === "toggle-search-filters") document.getElementById("searchFilters").classList.toggle("open");
     if (name === "open-folder-browser") {

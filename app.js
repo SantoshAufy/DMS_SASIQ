@@ -21,6 +21,7 @@ const icons = {
   briefcase: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M2 12h20"/>',
   filter: '<path d="M22 3H2l8 9.46V19l4 2v-8.54Z"/>',
   "layout-grid": '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+  "bar-chart": '<path d="M3 3v18h18"/><path d="M7 16v-5"/><path d="M12 16V8"/><path d="M17 16v-9"/>',
   list: '<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>',
   "refresh-cw": '<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/>',
   "folder-open": '<path d="m6 14 1.5-3h14l-3 7a2 2 0 0 1-1.84 1.2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v3"/>',
@@ -30,6 +31,7 @@ const icons = {
   info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
   lock: '<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
   check: '<path d="M20 6 9 17l-5-5"/>',
+  plus: '<path d="M12 5v14"/><path d="M5 12h14"/>',
   history: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/>',
   download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>',
   eye: '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
@@ -673,6 +675,8 @@ function init() {
     }
     if (name === "toggle-bookmark-filters") document.getElementById("bookmarkFilters").classList.toggle("open");
     if (name === "toggle-search-filters") document.getElementById("searchFilters").classList.toggle("open");
+    if (name?.startsWith("settings-")) toast("Settings action completed");
+    if (name?.startsWith("reports-")) toast("Report action completed");
     if (name === "open-folder-browser") {
       folderBrowserRoot = currentUploadRoot();
       renderFolderBrowser();
@@ -716,6 +720,13 @@ function init() {
   ["searchStatusFilter", "searchTypeFilter", "searchProjectFilter"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", renderSearchResults);
+  });
+  document.querySelectorAll("[data-settings-tab]").forEach(tab => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.settingsTab;
+      document.querySelectorAll(".settings-tab").forEach(item => item.classList.toggle("active", item === tab));
+      document.querySelectorAll(".settings-panel").forEach(panel => panel.classList.toggle("active", panel.id === `settings-${target}`));
+    });
   });
   document.getElementById("globalSearch").addEventListener("input", event => {
     document.getElementById("clearSearch").classList.toggle("visible", Boolean(event.target.value));

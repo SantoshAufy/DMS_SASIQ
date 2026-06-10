@@ -41,7 +41,6 @@ const legacyIcons = {
   folder: "📁",
   "chevrons-left": "«",
   "arrow-left": "←",
-  search: "⌕",
   "chevron-down": "⌄",
   "chevron-right": "›",
   "chevron-left": "‹",
@@ -329,7 +328,7 @@ function renderSearchResults() {
     (!type || doc.type === type) &&
     (!project || doc.project === project)
   );
-  renderTable("searchTable", rows);
+  renderTable("searchTable", rows, "search");
   hydrateIcons(document.getElementById("searchTable"));
   document.getElementById("searchSummary").textContent = query
     ? `Found ${rows.length} results for "${document.getElementById("globalSearch").value.trim()}".`
@@ -646,8 +645,13 @@ function init() {
   });
   document.getElementById("globalSearch").addEventListener("input", event => {
     document.getElementById("clearSearch").classList.toggle("visible", Boolean(event.target.value));
-    if (event.target.value.trim()) showView("search");
-    renderSearchResults();
+  });
+  document.getElementById("globalSearch").addEventListener("keydown", event => {
+    if (event.key === "Enter" && event.target.value.trim()) {
+      event.preventDefault();
+      renderSearchResults();
+      showView("search");
+    }
   });
   document.getElementById("clearSearch").addEventListener("click", () => {
     document.getElementById("globalSearch").value = "";
@@ -694,12 +698,6 @@ function init() {
     const rows = documents.filter(doc => doc.project === "Project_001" && Object.values(doc).join(" ").toLowerCase().includes(query));
     renderTable("projectTable", rows);
     hydrateIcons(document.getElementById("projectTable"));
-  });
-  document.addEventListener("keydown", event => {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-      event.preventDefault();
-      document.getElementById("globalSearch").focus();
-    }
   });
 }
 

@@ -2,8 +2,10 @@ const icons = {
   home: '<path d="m3 10.5 9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-7h6v7"/>',
   "badge-check": '<path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.78 4.78 4 4 0 0 1-6.74 0 4 4 0 0 1-4.78-4.78 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/>',
   "file-text": '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v6h6"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  "project-box": '<path d="M3 7h18"/><path d="M7 3h10l2 4H5l2-4Z"/><rect width="18" height="14" x="3" y="7" rx="2"/><path d="M8 12h8"/><path d="M8 16h5"/>',
   folder: '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7l-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2Z"/>',
   star: '<path d="m12 2 3.09 6.26L22 9.27l-5 4.88 1.18 6.88L12 17.77l-6.18 3.26L7 14.15 2 9.27l6.91-1.01Z"/>',
+  bookmark: '<path d="M19 21 12 17 5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/>',
   settings: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z"/><circle cx="12" cy="12" r="3"/>',
   "circle-help": '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"/><path d="M12 17h.01"/>',
   "chevrons-left": '<path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/>',
@@ -28,6 +30,7 @@ const icons = {
   info: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
   lock: '<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
   check: '<path d="M20 6 9 17l-5-5"/>',
+  history: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/>',
   download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>',
   eye: '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
   share: '<path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="m16 6-4-4-4 4"/><path d="M12 2v13"/>',
@@ -35,14 +38,7 @@ const icons = {
 };
 
 const legacyIcons = {
-  home: "⌂",
-  "badge-check": "✓",
-  "file-text": "□",
-  "project-box": "▦",
   folder: "📁",
-  star: "★",
-  settings: "⚙",
-  "circle-help": "?",
   "chevrons-left": "«",
   "arrow-left": "←",
   search: "⌕",
@@ -200,7 +196,7 @@ function statusClass(status) {
 }
 
 function fileCell(doc, favorite = false) {
-  return `<span class="file-name">${favorite ? '<span style="color:#f8a51b">' + icon("star") + '</span>' : ""}<span class="file-icon ${doc.ext}">${doc.ext.toUpperCase().slice(0,3)}</span>${doc.name}</span>`;
+  return `<span class="file-name">${favorite ? '<span style="color:#f8a51b">' + icon("bookmark") + '</span>' : ""}<span class="file-icon ${doc.ext}">${doc.ext.toUpperCase().slice(0,3)}</span>${doc.name}</span>`;
 }
 
 function renderTable(id, rows, mode = "full") {
@@ -322,6 +318,27 @@ function renderBookmarks() {
     : "No bookmarked documents found";
 }
 
+function renderSearchResults() {
+  const query = (document.getElementById("globalSearch")?.value || "").trim().toLowerCase();
+  const status = document.getElementById("searchStatusFilter")?.value || "";
+  const type = document.getElementById("searchTypeFilter")?.value || "";
+  const project = document.getElementById("searchProjectFilter")?.value || "";
+  const rows = documents.filter(doc =>
+    (!query || Object.values(doc).join(" ").toLowerCase().includes(query)) &&
+    (!status || doc.status === status) &&
+    (!type || doc.type === type) &&
+    (!project || doc.project === project)
+  );
+  renderTable("searchTable", rows);
+  hydrateIcons(document.getElementById("searchTable"));
+  document.getElementById("searchSummary").textContent = query
+    ? `Found ${rows.length} results for "${document.getElementById("globalSearch").value.trim()}".`
+    : "Search documents, folders and projects.";
+  document.getElementById("searchCount").textContent = rows.length
+    ? `Showing 1 to ${rows.length} of ${rows.length} results`
+    : "No search results found";
+}
+
 function renderDetails(targetId, doc = documents[0]) {
   document.getElementById(targetId).innerHTML = `
     <div class="details-header"><h2>Document Details</h2><button class="icon-button" data-action="close-details">${icon("x")}</button></div>
@@ -344,12 +361,40 @@ function renderDetails(targetId, doc = documents[0]) {
       <div class="detail-row"><span>Due Date</span><b>22 May 2024</b></div>
       <div class="detail-row"><span>Approved By</span><b>Ahmed Khan</b></div>
     </div>
+    <div class="details-card">
+      <h3>Version History</h3>
+      <div class="detail-row"><span>Current Version</span><b>Revision ${doc.rev}</b></div>
+      <div class="detail-row"><span>Previous Versions</span><b>3 records available</b></div>
+      <button class="detail-link" data-action="version-history">${icon("history")}View version history</button>
+    </div>
     <div class="detail-actions">
       <button class="btn ghost" data-action="download">${icon("download")}Download</button>
       <button class="btn ghost" data-action="preview">${icon("eye")}Preview</button>
-      <button class="btn ghost" data-action="add-favorite">${icon("star")}Bookmark</button>
+      <button class="btn ghost" data-action="add-favorite">${icon("bookmark")}Bookmark</button>
       <button class="btn ghost" data-action="share">${icon("share")}Share</button>
     </div>`;
+}
+
+function renderVersionHistory(doc = selectedDocument) {
+  const versions = [
+    { rev: doc.rev, status: doc.status, by: doc.by, date: doc.date, note: "Current approved document in active library." },
+    { rev: doc.rev === "A" ? "0" : "A", status: "Under Review", by: "Sara Ali", date: "18 May 2024", note: "Reviewed and routed for department approval." },
+    { rev: "Draft 02", status: "Draft", by: "Fatima Noor", date: "17 May 2024", note: "Updated document title, reference details and attachments." },
+    { rev: "Draft 01", status: "Draft", by: "Ahmed Khan", date: "16 May 2024", note: "Initial upload with metadata and folder path captured." }
+  ];
+  document.getElementById("versionTitle").textContent = `Version History - ${doc.ref}`;
+  document.getElementById("versionList").innerHTML = versions.map(item => `
+    <article class="version-item">
+      <span class="version-badge">${item.rev}</span>
+      <div>
+        <h3>${doc.name}</h3>
+        <p>${item.note}</p>
+        <small>Updated by ${item.by} on ${item.date}</small>
+      </div>
+      <span class="status ${statusClass(item.status)}">${item.status}</span>
+    </article>
+  `).join("");
+  hydrateIcons(document.getElementById("versionList"));
 }
 
 function openDetails(panelId, doc) {
@@ -454,7 +499,7 @@ function renderPreview(data = documents[0]) {
 }
 
 function applyFilters() {
-  const q = (document.getElementById("folderSearch")?.value || document.getElementById("globalSearch").value || "").toLowerCase();
+  const q = (document.getElementById("folderSearch")?.value || "").toLowerCase();
   const status = document.getElementById("statusFilter")?.value || "";
   const type = document.getElementById("typeFilter")?.value || "";
   const project = document.getElementById("projectFilter")?.value || "";
@@ -495,6 +540,7 @@ function init() {
   renderTable("projectTable", documents.filter(d => d.project === "Project_001").slice(0, 9));
   setUploadPath("Projects > Project_001 > Quality > Inspection & Test Plan");
   renderBookmarks();
+  renderSearchResults();
   document.getElementById("documentCount").textContent = "Showing 1 to 9 of 9 items";
   hydrateIcons();
 
@@ -531,6 +577,11 @@ function init() {
         hydrateIcons(document.getElementById("docCrumbs"));
       }
     }
+    if (row && row.closest("#view-search")) {
+      selectedDocument = documents[Number(row.dataset.doc)];
+      renderDocumentPreview(selectedDocument);
+      document.getElementById("previewDialog").showModal();
+    }
     if (row && row.closest("#view-documents, #view-projects")) {
       const doc = documents[Number(row.dataset.doc)];
       const panelId = row.closest("#view-projects") ? "projectDetails" : "detailsPanel";
@@ -548,6 +599,7 @@ function init() {
     const name = action.dataset.action;
     if (name === "open-upload") document.getElementById("uploadDialog").showModal();
     if (name === "toggle-bookmark-filters") document.getElementById("bookmarkFilters").classList.toggle("open");
+    if (name === "toggle-search-filters") document.getElementById("searchFilters").classList.toggle("open");
     if (name === "open-folder-browser") {
       folderBrowserRoot = currentUploadRoot();
       renderFolderBrowser();
@@ -561,7 +613,12 @@ function init() {
     if (name === "add-favorite") {
       selectedDocument.favorite = true;
       renderBookmarks();
+      renderSearchResults();
       toast("Document added to Bookmark");
+    }
+    if (name === "version-history") {
+      renderVersionHistory(selectedDocument);
+      document.getElementById("versionDialog").showModal();
     }
     if (name === "approve") toast("Document approved");
     if (name === "bulk-approve") toast("Selected approvals marked approved");
@@ -583,15 +640,19 @@ function init() {
     const el = document.getElementById(id);
     if (el) el.addEventListener("input", renderBookmarks);
   });
+  ["searchStatusFilter", "searchTypeFilter", "searchProjectFilter"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("input", renderSearchResults);
+  });
   document.getElementById("globalSearch").addEventListener("input", event => {
     document.getElementById("clearSearch").classList.toggle("visible", Boolean(event.target.value));
-    if (event.target.value.trim()) showView("documents");
-    applyFilters();
+    if (event.target.value.trim()) showView("search");
+    renderSearchResults();
   });
   document.getElementById("clearSearch").addEventListener("click", () => {
     document.getElementById("globalSearch").value = "";
     document.getElementById("clearSearch").classList.remove("visible");
-    applyFilters();
+    renderSearchResults();
   });
   document.getElementById("sidebarToggleTop").addEventListener("click", () => document.querySelector(".app-shell").dataset.sidebar = document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open");
   document.getElementById("sidebarToggleBottom").addEventListener("click", () => document.querySelector(".app-shell").dataset.sidebar = document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open");
@@ -600,6 +661,7 @@ function init() {
   document.getElementById("clearFavorites").addEventListener("click", () => {
     documents.forEach(doc => { doc.favorite = false; });
     renderBookmarks();
+    renderSearchResults();
     toast("Bookmarks cleared");
   });
   document.getElementById("copyShareLink").addEventListener("click", () => {

@@ -16,11 +16,12 @@
         <span data-icon="chevrons-left"></span>
       </button>
       <nav class="main-nav">
+        <span class="nav-caption">Navigation</span>
         <button class="nav-item active" data-view="home"><span data-icon="home"></span><span>Home</span></button>
         <button class="nav-item" data-view="approvals"><span data-icon="badge-check"></span><span>My Approvals</span><strong>8</strong></button>
         <button class="nav-item" data-view="documents"><span data-icon="file-text"></span><span>General Documents</span></button>
         <button class="nav-item" data-view="projects"><span data-icon="project-box"></span><span>Projects</span></button>
-        <button class="nav-item" data-view="favorites"><span data-icon="star"></span><span>Bookmark</span></button>
+        <button class="nav-item" data-view="favorites"><span data-icon="bookmark"></span><span>Bookmark</span></button>
       </nav>
       <nav class="utility-nav">
         <button class="nav-item" data-view="settings"><span data-icon="settings"></span><span>Settings</span></button>
@@ -84,6 +85,26 @@
           <div class="table-wrap">
             <table class="data-table" id="recentTable"></table>
           </div>
+        </section>
+      </section>
+
+      <section class="view" id="view-search" aria-label="Search Results">
+        <div class="page-head compact-head">
+          <div class="title-with-icon"><span data-icon="search"></span><div><h1>Search Results</h1><p id="searchSummary">Search documents, folders and projects.</p></div></div>
+          <div class="toolbar">
+            <button class="btn ghost" data-action="toggle-search-filters"><span data-icon="filter"></span>Filter</button>
+            <button class="icon-button active" data-layout="list" title="List view"><span data-icon="list"></span></button>
+            <button class="icon-button" data-layout="grid" title="Grid view"><span data-icon="layout-grid"></span></button>
+          </div>
+        </div>
+        <div class="filters-row wide open" id="searchFilters">
+          <select id="searchStatusFilter"><option value="">All Statuses</option><option>Approved</option><option>Under Review</option><option>Rejected</option><option>Draft</option></select>
+          <select id="searchTypeFilter"><option value="">All Types</option><option>Inspection Plan</option><option>Main Contract</option><option>Project Drawing</option><option>Shop Drawings</option><option>Solaris</option></select>
+          <select id="searchProjectFilter"><option value="">All Projects</option><option>Project_001</option><option>Project_002</option><option>Project_003</option><option>Project_004</option></select>
+        </div>
+        <section class="table-card wide">
+          <div class="table-wrap"><table class="data-table" id="searchTable"></table></div>
+          <div class="table-footer"><span id="searchCount"></span><div class="pager"><button><span data-icon="chevron-left"></span></button><button class="active">1</button><button><span data-icon="chevron-right"></span></button></div></div>
         </section>
       </section>
 
@@ -168,7 +189,7 @@
 
       <section class="view" id="view-favorites" aria-label="Bookmark">
         <div class="page-head compact-head">
-          <div class="title-with-icon"><span data-icon="star"></span><div><h1>Bookmark</h1><p>Your bookmarked documents for quick access.</p></div></div>
+          <div class="title-with-icon"><span data-icon="bookmark"></span><div><h1>Bookmark</h1><p>Your bookmarked documents for quick access.</p></div></div>
           <div class="toolbar">
             <label class="local-search"><span data-icon="search"></span><input id="bookmarkSearch" type="search" placeholder="Search bookmarks..."></label>
             <button class="btn ghost" data-action="toggle-bookmark-filters"><span data-icon="filter"></span>Filter</button>
@@ -288,6 +309,16 @@
         <button class="btn ghost" value="cancel">Cancel</button>
         <button class="btn upload-action" id="applyFolderPath" value="apply"><span data-icon="folder-open"></span>Select Folder</button>
       </div>
+    </form>
+  </dialog>
+
+  <dialog id="versionDialog" class="modal version-modal">
+    <form method="dialog" class="version-form">
+      <header class="modal-head">
+        <div><h1 id="versionTitle">Version History</h1><p>Previous revisions and document activity.</p></div>
+        <button class="icon-button" value="close"><span data-icon="x"></span></button>
+      </header>
+      <div class="version-list" id="versionList"></div>
     </form>
   </dialog>
 

@@ -781,9 +781,27 @@ function setSidebarState(state) {
   const iconName = state === "closed" ? "chevrons-right" : "chevrons-left";
   document.getElementById("sidebarToggleTop").innerHTML = icon(iconName);
   hydrateIcons(document.getElementById("sidebarToggleTop"));
-  const bottomIcon = state === "closed" ? "arrow-right" : "arrow-left";
-  document.getElementById("sidebarToggleBottom").querySelector("span:first-child").outerHTML = `<span data-icon="${bottomIcon}"></span>`;
-  hydrateIcons(document.getElementById("sidebarToggleBottom"));
+}
+
+function openGlobalSearch() {
+  const menu = document.getElementById("globalSearchMenu");
+  const popover = document.getElementById("globalSearchPopover");
+  const toggle = document.getElementById("globalSearchToggle");
+  if (!menu || !popover || !toggle) return;
+  menu.classList.add("open");
+  popover.setAttribute("aria-hidden", "false");
+  toggle.setAttribute("aria-expanded", "true");
+  requestAnimationFrame(() => document.getElementById("globalSearch")?.focus());
+}
+
+function closeGlobalSearch() {
+  const menu = document.getElementById("globalSearchMenu");
+  const popover = document.getElementById("globalSearchPopover");
+  const toggle = document.getElementById("globalSearchToggle");
+  if (!menu || !popover || !toggle) return;
+  menu.classList.remove("open");
+  popover.setAttribute("aria-hidden", "true");
+  toggle.setAttribute("aria-expanded", "false");
 }
 
 function toast(message) {
@@ -1071,6 +1089,7 @@ function init() {
     const actionName = action?.dataset.action;
     const row = event.target.closest("tr[data-doc]");
     const folder = event.target.closest("[data-folder]");
+    if (!event.target.closest("#globalSearchMenu")) closeGlobalSearch();
     if (!event.target.closest("#rowActionMenu") && actionName !== "row-menu") closeRowMenu();
     if (viewButton) showView(viewButton.dataset.view);
     if (viewLink) showView(viewLink.dataset.viewLink);
@@ -1232,15 +1251,24 @@ function init() {
       event.preventDefault();
       renderSearchResults();
       showView("search");
+      closeGlobalSearch();
     }
   });
   document.getElementById("clearSearch").addEventListener("click", () => {
     document.getElementById("globalSearch").value = "";
     document.getElementById("clearSearch").classList.remove("visible");
     renderSearchResults();
+    document.getElementById("globalSearch").focus();
+  });
+  document.getElementById("globalSearchToggle").addEventListener("click", event => {
+    event.stopPropagation();
+    const menu = document.getElementById("globalSearchMenu");
+    menu.classList.contains("open") ? closeGlobalSearch() : openGlobalSearch();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeGlobalSearch();
   });
   document.getElementById("sidebarToggleTop").addEventListener("click", () => setSidebarState(document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open"));
-  document.getElementById("sidebarToggleBottom").addEventListener("click", () => setSidebarState(document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open"));
   document.getElementById("mobileMenu").addEventListener("click", () => document.querySelector(".app-shell").classList.toggle("mobile-open"));
   document.getElementById("submitUpload").addEventListener("click", () => toast("Document submitted for approval"));
   document.getElementById("clearFavorites").addEventListener("click", () => {

@@ -4,19 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SAS Corporate DMS Prototype</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260611-brand-327-header-search">
 </head>
 <body>
   <div class="app-shell" data-sidebar="open">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Shams Al Sabah General Contracting Co. Ltd.">
+    </div>
     <aside class="sidebar" aria-label="Main navigation">
-      <div class="brand">
-        <img src="assets/logo.png" alt="Shams Al Sabah General Contracting Co. Ltd.">
-      </div>
-      <button class="collapse-top icon-button" id="sidebarToggleTop" aria-label="Collapse sidebar">
-        <span data-icon="chevrons-left"></span>
-      </button>
-      <nav class="main-nav">
+      <div class="nav-control">
         <span class="nav-caption">Navigation</span>
+        <button class="collapse-top icon-button" id="sidebarToggleTop" aria-label="Collapse sidebar">
+          <span data-icon="chevrons-left"></span>
+        </button>
+      </div>
+      <nav class="main-nav">
         <button class="nav-item active" data-view="home"><span data-icon="home"></span><span>Home</span></button>
         <button class="nav-item" data-view="approvals"><span data-icon="badge-check"></span><span>My Approvals</span><strong>8</strong></button>
         <button class="nav-item" data-view="documents"><span data-icon="file-text"></span><span>Company Records</span></button>
@@ -28,14 +30,20 @@
         <button class="nav-item" data-view="settings"><span data-icon="settings"></span><span>Settings</span></button>
         <button class="nav-item" data-view="support"><span data-icon="circle-help"></span><span>Help &amp; Support</span></button>
       </nav>
-      <button class="collapse-bottom" id="sidebarToggleBottom"><span data-icon="arrow-left"></span><span>Collapse</span></button>
     </aside>
 
     <header class="topbar">
-      <div class="search-wrap">
-        <span data-icon="search"></span>
-        <input id="globalSearch" type="search" placeholder="Search documents, folders, projects..." autocomplete="off">
-        <button id="clearSearch" class="clear-search" aria-label="Clear search"><span data-icon="x"></span></button>
+      <div class="search-menu" id="globalSearchMenu">
+        <button class="search-toggle icon-button" id="globalSearchToggle" aria-label="Open search" aria-expanded="false">
+          <span data-icon="search"></span>
+        </button>
+        <div class="search-popover" id="globalSearchPopover" aria-hidden="true">
+          <div class="search-wrap">
+            <span data-icon="search"></span>
+            <input id="globalSearch" type="search" placeholder="Search documents, folders, projects..." autocomplete="off">
+            <button id="clearSearch" class="clear-search" aria-label="Clear search"><span data-icon="x"></span></button>
+          </div>
+        </div>
       </div>
       <button class="mobile-menu icon-button" id="mobileMenu" aria-label="Open navigation"><span data-icon="menu"></span></button>
       <div class="profile">
@@ -112,10 +120,6 @@
         <div class="split-layout">
           <aside class="folder-panel">
             <h2>Folder Structure</h2>
-            <div class="folder-panel-tools">
-              <label class="tree-search"><span data-icon="search"></span><input type="search" data-tree-search="generalTree" placeholder="Search folders..."></label>
-              <button class="icon-button" title="Filter folders"><span data-icon="filter"></span></button>
-            </div>
             <div id="generalTree" class="folder-tree"></div>
           </aside>
           <section class="workspace">
@@ -157,10 +161,6 @@
         <div class="split-layout projects-layout">
           <aside class="folder-panel">
             <h2>Project Structure</h2>
-            <div class="folder-panel-tools">
-              <label class="tree-search"><span data-icon="search"></span><input type="search" data-tree-search="projectTree" placeholder="Search folders..."></label>
-              <button class="icon-button" title="Filter folders"><span data-icon="filter"></span></button>
-            </div>
             <div id="projectTree" class="folder-tree"></div>
           </aside>
           <section class="workspace">

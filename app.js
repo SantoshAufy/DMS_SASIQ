@@ -452,7 +452,6 @@ function openRowMenu(button, doc) {
     <button data-action="download">${icon("download")}Download</button>
     <button data-action="preview">${icon("eye")}Preview</button>
     <button data-action="share">${icon("share")}Share</button>
-    <button data-action="add-favorite">${icon("bookmark")}Bookmark</button>
   `;
   menu.style.top = `${rect.bottom + 8}px`;
   menu.style.left = `${Math.max(12, Math.min(rect.left - 150, window.innerWidth - 230))}px`;
@@ -462,6 +461,7 @@ function openRowMenu(button, doc) {
 }
 
 function renderBookmarks() {
+  if (!document.getElementById("favoritesTable")) return;
   const query = (document.getElementById("bookmarkSearch")?.value || "").toLowerCase();
   const status = document.getElementById("bookmarkStatusFilter")?.value || "";
   const type = document.getElementById("bookmarkTypeFilter")?.value || "";
@@ -565,19 +565,43 @@ function renderSearchResults() {
 }
 
 function renderDetails(targetId, doc = documents[0]) {
+  const createdDate = doc.date;
+  const modifiedDate = doc.status === "Draft" ? doc.date : "21 May 2024";
+  const sensitivity = doc.type === "Main Contract" ? "Confidential" : "Internal";
+  const category = doc.type === "Inspection Plan" ? "Quality" : doc.type;
+  const tags = [doc.type, doc.project, doc.ref.split("-")[1] || "Document"].filter(Boolean).join(", ");
+  const location = doc.project === "Project_001"
+    ? "Projects > Project_001 > Quality > Inspection & Test Plan"
+    : "Company Records > Quality > Inspection & Test Plans";
   document.getElementById(targetId).innerHTML = `
     <div class="details-header"><h2>Document Details</h2><button class="icon-button" data-action="close-details">${icon("x")}</button></div>
     <div class="details-card">
-      <h3>File Information</h3>
-      <div class="detail-row"><span>Document</span><b>${doc.name}</b></div>
+      <h3>Descriptive Metadata</h3>
+      <div class="detail-row"><span>Ref. No.</span><b>${doc.ref}</b></div>
+      <div class="detail-row"><span>Name</span><b>${doc.name}</b></div>
+      <div class="detail-row"><span>Title / Description</span><b>${doc.subject}</b></div>
+      <div class="detail-row"><span>Department / Category</span><b>${category}</b></div>
+      <div class="detail-row"><span>Tags / Keywords</span><b>${tags}</b></div>
+      <div class="detail-row"><span>Sensitivity / Classification</span><span class="status draft">${sensitivity}</span></div>
+      <div class="detail-row"><span>Folder / Location</span><b>${location}</b></div>
+      <div class="detail-row"><span>Project / Records Area</span><b>${doc.project}</b></div>
+    </div>
+    <div class="details-card">
+      <h3>Technical & Structural Metadata</h3>
+      <div class="detail-row"><span>Type / Extension</span><b>${doc.ext.toUpperCase()}</b></div>
+      <div class="detail-row"><span>Size</span><b>${doc.size}</b></div>
+      <div class="detail-row"><span>Version Number</span><b>Revision ${doc.rev}</b></div>
+      <div class="detail-row"><span>Version History</span><b>Auto captured</b></div>
+    </div>
+    <div class="details-card">
+      <h3>Administrative & Security Metadata</h3>
       <div class="detail-row"><span>Status</span><span class="status ${statusClass(doc.status)}">${doc.status}</span></div>
-      <div class="detail-row"><span>Reference Number</span><b>${doc.ref}</b></div>
-      <div class="detail-row"><span>Revision</span><b>${doc.rev}</b></div>
-      <div class="detail-row"><span>Subject / Title</span><b>${doc.subject}</b></div>
-      <div class="detail-row"><span>Document Type</span><b>${doc.type}</b></div>
-      <div class="detail-row"><span>Project</span><b>${doc.project}</b></div>
-      <div class="detail-row"><span>Confidentiality</span><span class="status draft">Internal Use</span></div>
-      <div class="detail-row"><span>Uploaded By</span><b>${doc.by}</b></div>
+      <div class="detail-row"><span>Created By</span><b>${doc.by}</b></div>
+      <div class="detail-row"><span>Creation Date</span><b>${createdDate}</b></div>
+      <div class="detail-row"><span>Modified By</span><b>${doc.by}</b></div>
+      <div class="detail-row"><span>Modification Date</span><b>${modifiedDate}</b></div>
+      <div class="detail-row"><span>Document Date</span><b>${doc.date}</b></div>
+      <div class="detail-row"><span>Activity Log</span><b>Captured in version history</b></div>
     </div>
     <div class="details-card">
       <h3>Approval Details</h3>
@@ -589,13 +613,12 @@ function renderDetails(targetId, doc = documents[0]) {
     <div class="details-card">
       <h3>Version History</h3>
       <div class="detail-row"><span>Current Version</span><b>Revision ${doc.rev}</b></div>
-      <div class="detail-row"><span>Previous Versions</span><b>3 records available</b></div>
+      <div class="detail-row"><span>Activity Records</span><b>3 records available</b></div>
       <button class="detail-link" data-action="version-history">${icon("history")}View version history</button>
     </div>
     <div class="detail-actions">
       <button class="btn ghost" data-action="download">${icon("download")}Download</button>
       <button class="btn ghost" data-action="preview">${icon("eye")}Preview</button>
-      <button class="btn ghost" data-action="add-favorite">${icon("bookmark")}Bookmark</button>
       <button class="btn ghost" data-action="share">${icon("share")}Share</button>
     </div>`;
 }
@@ -771,7 +794,7 @@ function applyFilters() {
 function showView(view) {
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   document.getElementById(`view-${view}`)?.classList.add("active");
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === view));
+  document.querySelectorAll(".nav-item, .top-nav-item").forEach(n => n.classList.toggle("active", n.dataset.view === view));
   document.querySelector(".app-shell").classList.remove("mobile-open");
 }
 
@@ -1076,7 +1099,6 @@ function init() {
   renderTable("documentsTable", documents.slice(0, 9));
   renderTable("projectTable", documents.filter(d => d.project === "Project_001").slice(0, 9));
   setUploadPath("Projects > Project_001 > Quality > Inspection & Test Plan");
-  renderBookmarks();
   renderSearchResults();
   updateReportKpis();
   document.getElementById("documentCount").textContent = "Showing 1 to 9 of 9 items";
@@ -1148,7 +1170,7 @@ function init() {
       const menuRow = action.closest("tr[data-doc]");
       if (menuRow) openRowMenu(action, documents[Number(menuRow.dataset.doc)]);
     }
-    if (name === "toggle-bookmark-filters") document.getElementById("bookmarkFilters").classList.toggle("open");
+    if (name === "toggle-bookmark-filters") document.getElementById("bookmarkFilters")?.classList.toggle("open");
     if (name === "toggle-search-filters") document.getElementById("searchFilters").classList.toggle("open");
     if (name?.startsWith("settings-")) {
       if (name === "settings-save" || name === "settings-sync-folders") {
@@ -1173,12 +1195,6 @@ function init() {
     if (name === "download") toast("Download started");
     if (name === "close-details") closeDetails(action.closest(".details-panel"));
     if (name === "share") openShareDialog(selectedDocument);
-    if (name === "add-favorite") {
-      selectedDocument.favorite = true;
-      renderBookmarks();
-      renderSearchResults();
-      toast("Document added to Bookmark");
-    }
     if (name === "version-history") {
       renderVersionHistory(selectedDocument);
       document.getElementById("versionDialog").showModal();
@@ -1260,7 +1276,7 @@ function init() {
     renderSearchResults();
     document.getElementById("globalSearch").focus();
   });
-  document.getElementById("globalSearchToggle").addEventListener("click", event => {
+  document.getElementById("globalSearchToggle")?.addEventListener("click", event => {
     event.stopPropagation();
     const menu = document.getElementById("globalSearchMenu");
     menu.classList.contains("open") ? closeGlobalSearch() : openGlobalSearch();
@@ -1271,7 +1287,7 @@ function init() {
   document.getElementById("sidebarToggleTop").addEventListener("click", () => setSidebarState(document.querySelector(".app-shell").dataset.sidebar === "open" ? "closed" : "open"));
   document.getElementById("mobileMenu").addEventListener("click", () => document.querySelector(".app-shell").classList.toggle("mobile-open"));
   document.getElementById("submitUpload").addEventListener("click", () => toast("Document submitted for approval"));
-  document.getElementById("clearFavorites").addEventListener("click", () => {
+  document.getElementById("clearFavorites")?.addEventListener("click", () => {
     documents.forEach(doc => { doc.favorite = false; });
     renderBookmarks();
     renderSearchResults();

@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SAS Corporate DMS Prototype</title>
-  <link rel="stylesheet" href="styles.css?v=20260611-wave-hand">
+  <link rel="stylesheet" href="styles.css?v=20260622-dms-clean-nav">
 </head>
 <body>
   <div class="app-shell" data-sidebar="open">
     <div class="brand">
-      <img src="assets/logo.png" alt="Shams Al Sabah General Contracting Co. Ltd.">
+      <img src="assets/shams_al_sabah_logo_black_text.png" alt="Shams Al Sabah General Contracting Co. Ltd.">
     </div>
     <aside class="sidebar" aria-label="Main navigation">
       <div class="nav-control">
@@ -23,7 +23,6 @@
         <button class="nav-item" data-view="approvals"><span data-icon="badge-check"></span><span>My Approvals</span><strong>8</strong></button>
         <button class="nav-item" data-view="documents"><span data-icon="file-text"></span><span>Company Records</span></button>
         <button class="nav-item" data-view="projects"><span data-icon="project-box"></span><span>Projects</span></button>
-        <button class="nav-item" data-view="favorites"><span data-icon="bookmark"></span><span>Bookmark</span></button>
         <button class="nav-item" data-view="reports"><span data-icon="bar-chart"></span><span>Reports</span></button>
       </nav>
       <nav class="utility-nav">
@@ -33,16 +32,22 @@
     </aside>
 
     <header class="topbar">
-      <div class="search-menu" id="globalSearchMenu">
-        <button class="search-toggle icon-button" id="globalSearchToggle" aria-label="Open search" aria-expanded="false">
+      <div class="topbar-brand">
+        <img src="assets/shams_al_sabah_logo_black_text.png" alt="Shams Al Sabah General Contracting Co. Ltd.">
+      </div>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <button class="top-nav-item active" data-view="home"><span data-icon="home"></span><span>Dashboard</span></button>
+        <button class="top-nav-item" data-view="approvals"><span data-icon="badge-check"></span><span>My Approvals</span><strong>8</strong></button>
+        <button class="top-nav-item" data-view="documents"><span data-icon="file-text"></span><span>Documents</span></button>
+        <button class="top-nav-item" data-view="projects"><span data-icon="project-box"></span><span>Projects</span></button>
+        <button class="top-nav-item" data-view="reports"><span data-icon="bar-chart"></span><span>Reports</span></button>
+        <button class="top-nav-item" data-view="settings"><span data-icon="settings"></span><span>Settings</span></button>
+      </nav>
+      <div class="search-menu static-search" id="globalSearchMenu">
+        <div class="search-wrap">
           <span data-icon="search"></span>
-        </button>
-        <div class="search-popover" id="globalSearchPopover" aria-hidden="true">
-          <div class="search-wrap">
-            <span data-icon="search"></span>
-            <input id="globalSearch" type="search" placeholder="Search documents, folders, projects..." autocomplete="off">
-            <button id="clearSearch" class="clear-search" aria-label="Clear search"><span data-icon="x"></span></button>
-          </div>
+          <input id="globalSearch" type="search" placeholder="Search documents, folders, projects..." autocomplete="off">
+          <button id="clearSearch" class="clear-search" aria-label="Clear search"><span data-icon="x"></span></button>
         </div>
       </div>
       <button class="mobile-menu icon-button" id="mobileMenu" aria-label="Open navigation"><span data-icon="menu"></span></button>
@@ -61,6 +66,45 @@
             <p>Here is what is happening with your documents today.</p>
           </div>
           <button class="btn upload-action" data-action="open-upload"><span data-icon="upload"></span>Upload Document</button>
+        </div>
+
+        <div class="home-kpi-row">
+          <article class="home-kpi-card" data-view-link="approvals">
+            <span class="home-kpi-icon blue"><span data-icon="file-text"></span></span>
+            <span class="home-kpi-copy">
+              <small>My Pending Approvals</small>
+              <strong>8</strong>
+              <em>Documents awaiting review</em>
+            </span>
+            <span class="home-kpi-arrow" data-icon="chevron-right"></span>
+          </article>
+          <article class="home-kpi-card" data-view-link="documents">
+            <span class="home-kpi-icon green"><span data-icon="folder"></span></span>
+            <span class="home-kpi-copy">
+              <small>Total Documents</small>
+              <strong>1,245</strong>
+              <em>Across all categories</em>
+            </span>
+            <span class="home-kpi-arrow" data-icon="chevron-right"></span>
+          </article>
+          <article class="home-kpi-card" data-view-link="projects">
+            <span class="home-kpi-icon purple"><span data-icon="briefcase"></span></span>
+            <span class="home-kpi-copy">
+              <small>Active Projects</small>
+              <strong>23</strong>
+              <em>Ongoing projects</em>
+            </span>
+            <span class="home-kpi-arrow" data-icon="chevron-right"></span>
+          </article>
+          <article class="home-kpi-card" data-view-link="approvals">
+            <span class="home-kpi-icon red"><span data-icon="x"></span></span>
+            <span class="home-kpi-copy">
+              <small>Rejected Documents by Me</small>
+              <strong>4</strong>
+              <em>Returned with comments</em>
+            </span>
+            <span class="home-kpi-arrow" data-icon="chevron-right"></span>
+          </article>
         </div>
 
         <div class="dashboard-grid">
@@ -195,31 +239,6 @@
         </div>
       </section>
 
-      <section class="view" id="view-favorites" aria-label="Bookmark">
-        <div class="page-head compact-head">
-          <div class="title-with-icon"><span data-icon="bookmark"></span><div><h1>Bookmark</h1><p>Your bookmarked documents for quick access.</p></div></div>
-          <div class="toolbar">
-            <label class="local-search"><span data-icon="search"></span><input id="bookmarkSearch" type="search" placeholder="Search bookmarks..."></label>
-            <button class="btn ghost" data-action="toggle-bookmark-filters"><span data-icon="filter"></span>Filter</button>
-            <button class="icon-button active" data-layout="list" title="List view"><span data-icon="list"></span></button>
-            <button class="icon-button" data-layout="grid" title="Grid view"><span data-icon="layout-grid"></span></button>
-            <button class="link-button" id="clearFavorites">Clear All</button>
-          </div>
-        </div>
-        <div class="filters-row wide" id="bookmarkFilters">
-          <select id="bookmarkStatusFilter"><option value="">All Statuses</option><option>Approved</option><option>Under Review</option><option>Rejected</option><option>Draft</option></select>
-          <select id="bookmarkTypeFilter"><option value="">All Types</option><option>Inspection Plan</option><option>Main Contract</option><option>Project Drawing</option><option>Shop Drawings</option><option>Solaris</option></select>
-          <select id="bookmarkProjectFilter"><option value="">All Projects</option><option>Project_001</option><option>Project_002</option><option>Project_003</option><option>Project_004</option></select>
-        </div>
-        <div class="bookmark-layout wide" id="bookmarkLayout">
-          <section class="table-card">
-            <div class="table-wrap"><table class="data-table" id="favoritesTable"></table></div>
-            <div class="table-footer"><span id="favoritesCount"></span><div class="pager"><button><span data-icon="chevron-left"></span></button><button class="active">1</button><button><span data-icon="chevron-right"></span></button></div></div>
-          </section>
-          <aside class="details-panel" id="bookmarkDetails"></aside>
-        </div>
-      </section>
-
       <section class="view" id="view-reports" aria-label="Reports">
         <div class="page-head compact-head">
           <div class="title-with-icon"><span data-icon="bar-chart"></span><div><h1>Reports</h1><p>Comprehensive document upload, approval and pending status overview.</p></div></div>
@@ -333,12 +352,12 @@
         <section class="form-section">
           <h2>2. Document Information</h2>
           <div class="field-grid">
-            <label><span class="field-label">Document Title / Subject <b>*</b></span><input value="Inspection & Test Plan - Mechanical Works"></label>
-            <label><span class="field-label">Document Type <b>*</b></span><select><option>Inspection Plan</option><option>Shop Drawings</option><option>Main Contract</option></select></label>
-            <label><span class="field-label">Reference Number <b>*</b></span><input value="ITP-MECH-001"></label>
-            <label><span class="field-label">Document Date <b>*</b></span><input value="20 May 2024"></label>
-            <label><span class="field-label">Revision</span><input value="A"></label>
-            <label><span class="field-label">Confidentiality <b>*</b></span><select><option>Internal Use</option><option>Confidential</option><option>Public</option></select></label>
+            <label><span class="field-label">Ref. No. <b>*</b></span><input value="ITP-MECH-001"></label>
+            <label><span class="field-label">Name <b>*</b></span><input value="ITP-MECH-001-RevA.pdf"></label>
+            <label class="wide-field"><span class="field-label">Title / Description <b>*</b></span><textarea rows="3">Inspection & Test Plan - Mechanical Works - Chiller System</textarea></label>
+            <label><span class="field-label">Department / Category <b>*</b></span><select><option>Quality</option><option>HSE</option><option>Admin</option><option>Finance & Accounting</option><option>Material Management</option><option>Contracts</option><option>Technical</option><option>Project DCC</option></select></label>
+            <label><span class="field-label">Tags / Keywords</span><input value="ITP, Mechanical, Chiller, Quality"></label>
+            <label><span class="field-label">Sensitivity / Classification <b>*</b></span><select><option>Internal</option><option>Public</option><option>Confidential</option><option>Restricted</option></select></label>
           </div>
           <h2>4. Upload File</h2>
           <div class="drop-zone"><span data-icon="cloud-upload"></span><strong>Drag &amp; drop file(s) here or</strong><button type="button" class="btn outline-accent small">Browse Files</button><small>Allowed file types: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG. Max. 100 MB</small></div>
@@ -409,7 +428,7 @@
       <div class="manual-doc">
         <section><h3>1. Dashboard</h3><p>Use the dashboard to open Company Records, Project Documents, pending approvals and recent uploads.</p></section>
         <section><h3>2. Upload Documents</h3><p>Select the document area, confirm the prefilled folder path, enter document metadata, attach the file and submit for approval.</p></section>
-        <section><h3>3. Folder Library</h3><p>Browse the left folder structure, open document details, preview files, share links, download documents or add documents to Bookmark.</p></section>
+        <section><h3>3. Folder Library</h3><p>Browse the folder structure, open document details, preview files, share links and download documents.</p></section>
         <section><h3>4. Approvals</h3><p>Review assigned documents, preview metadata, then approve or take action based on the approval workflow.</p></section>
         <section><h3>5. Settings</h3><p>Admins can manage project creation, access, workflows, folder structure, departments and Settings visibility.</p></section>
       </div>
